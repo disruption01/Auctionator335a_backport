@@ -1,0 +1,64 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorInsetTemplate" virtual="true">
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture inherits="Auctionator_AuctionHouseBackgroundIndex" name="$parentBg">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+		<Frames>
+      <Frame inherits="InsetFrameTemplate4">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" y="-2"/>
+        </Anchors>
+      </Frame>
+		</Frames>
+  <Scripts><OnLoad>if self:GetName() then self.Bg = _G[self:GetName() .. 'Bg'] end</OnLoad></Scripts></Frame>
+
+  <Frame name="AuctionatorInsetDarkTemplate" virtual="true">
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture inherits="Auctionator_AuctionHouseBackgroundSellRight" name="$parentBg">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parent"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+		<Frames>
+      <Frame inherits="InsetFrameTemplate4">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" y="-2"/>
+        </Anchors>
+      </Frame>
+		</Frames>
+  <Scripts><OnLoad>if self:GetName() then self.Bg = _G[self:GetName() .. 'Bg'] end</OnLoad></Scripts></Frame>
+
+  <Frame name="AuctionatorInsetLeaveScrollSpaceTemplate" virtual="true">
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture inherits="Auctionator_AuctionHouseBackgroundIndex" name="$parentBg">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-28" relativeTo="$parent"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+		<Frames>
+      <Frame inherits="InsetFrameTemplate4">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="5"/>
+          <Anchor point="BOTTOMRIGHT" x="5" y="-2"/>
+        </Anchors>
+      </Frame>
+		</Frames>
+  <Scripts><OnLoad>if self:GetName() then self.Bg = _G[self:GetName() .. 'Bg'] end</OnLoad></Scripts></Frame>
+</Ui>

@@ -1,0 +1,41 @@
+<Ui>
+  <!--XXX: Modified InputBoxTemplate as the LargeInputBoxTemplate textures don't exist in BCC -->
+	<EditBox name="AuctionatorRetailImportLargeInputBoxTemplate" inherits="InputBoxScriptTemplate" autoFocus="false" virtual="true">
+    <Scripts>
+      <OnLoad>if self:GetName() then self.Left = _G[self:GetName() .. 'Left'] end; if self:GetName() then self.Right = _G[self:GetName() .. 'Right'] end; if self:GetName() then self.Middle = _G[self:GetName() .. 'Middle'] end</OnLoad><OnTabPressed>if AuctionatorRetailImportEditBox_OnTabPressed then AuctionatorRetailImportEditBox_OnTabPressed(self) end</OnTabPressed>
+    </Scripts>
+		<Size x="110" y="33"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\Common\Common-Input-Border" name="$parentLeft">
+					<Size x="10" y="25"/>
+					<Anchors>
+						<Anchor point="LEFT" x="-5" y="0"/>
+					</Anchors>
+					<TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture file="Interface\Common\Common-Input-Border" name="$parentRight">
+					<Size x="10" y="25"/>
+					<Anchors>
+						<Anchor point="RIGHT" x="0" y="0"/>
+					</Anchors>
+					<TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+				</Texture>
+				<Texture file="Interface\Common\Common-Input-Border" name="$parentMiddle">
+					<Size x="10" y="25"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentLeft"/>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parentRight"/>
+					</Anchors>
+					<TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<FontString inherits="ChatFontNormal">
+			<Anchors>
+				<Anchor point="LEFT" x="6" y="0"/>
+			</Anchors>
+		</FontString>
+		<TextInsets left="10" right="10" bottom="1" top="0"/>
+	</EditBox>
+</Ui>

@@ -1,0 +1,20 @@
+<Ui>
+  <Frame name="AuctionatorFullScanStatusTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorFullScanStatusMixin); if self:GetName() then self.Text = _G[self:GetName() .. 'Text'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+    </Scripts>
+    <Size y="15"/>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString inherits="GameFontHighlight" justifyH="LEFT" text="" name="$parentText">
+          <Size x="60"/>
+          <Anchors>
+            <Anchor point="LEFT" relativePoint="LEFT" x="35"/>
+            <Anchor point="TOP" relativePoint="TOP" relativeTo="$parent"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

@@ -1,0 +1,38 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorItemKeyCellTemplate" enableMouse="true" virtual="true">
+    <!-- Copy and paste from AuctionHouseTableCellItemDisplayTemplate -->
+    <Size x="0" y="16"/>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentIcon">
+          <Size x="14" y="14"/>
+          <Anchors>
+            <Anchor point="LEFT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+
+      <Layer level="BACKGROUND">
+        <Texture file="Interface\Buttons\UI-ActionButton-Border" name="$parentIconBorder">
+          <Size x="16" y="16"/>
+          <Anchors>
+            <Anchor point="CENTER" relativeTo="$parentIcon"/>
+          </Anchors>
+        </Texture>
+        <FontString inherits="ChatFontNormal" justifyH="LEFT" maxLines="1" name="$parentText">
+          <Size x="0" y="1"/>
+          <Anchors>
+            <Anchor point="LEFT" relativePoint="RIGHT" x="4" y="-1" relativeTo="$parentIcon"/>
+            <Anchor point="RIGHT" x="1"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorItemKeyCellTemplateMixin); if self:GetParent() then self:GetParent().cell = self end; if self:GetName() then self.Icon = _G[self:GetName() .. 'Icon'] end; if self:GetName() then self.IconBorder = _G[self:GetName() .. 'IconBorder'] end; if self:GetName() then self.Text = _G[self:GetName() .. 'Text'] end</OnLoad><OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+      <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+      <OnMouseUp>if self.OnClick then self:OnClick(button) end</OnMouseUp>
+    </Scripts>
+  </Frame>
+</Ui>

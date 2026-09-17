@@ -1,0 +1,27 @@
+<Ui>
+  <Frame name="AuctionatorGroupsViewTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorGroupsViewMixin); if self:GetParent() then self:GetParent().View = self end; self.itemTemplate = 'AuctionatorGroupsViewItemTemplate'; self.groupTemplate = 'AuctionatorGroupsViewGroupTemplate'; self.groupInsetX = 0; self.clickEventName = 'BagItemClicked'; self.completeEventName = 'ViewComplete'; self.hideHiddenItems = false; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+    <Frames>
+      <Slider inherits="WowTrimScrollBar" name="$parentScrollBar">
+        <Anchors>
+          <Anchor point="TOPRIGHT"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBar = self end</OnLoad></Scripts></Slider>
+      <Frame inherits="WowScrollBox" name="$parentScrollBox">
+        <Anchors>
+            <Anchor point="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" y="3" relativeTo="$parentScrollBar"/>
+        </Anchors>
+        <Frames>
+          <Frame name="$parentItemListingFrame">
+            <Scripts><OnLoad>if self:GetParent() then self:GetParent().ItemListingFrame = self end; self.scrollable = true</OnLoad></Scripts></Frame>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBox = self end</OnLoad></Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>

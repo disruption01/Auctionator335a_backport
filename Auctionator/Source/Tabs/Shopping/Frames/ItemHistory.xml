@@ -1,0 +1,73 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorItemHistoryTemplate" inherits="AuctionatorSimplePanelTemplate" frameStrata="Dialog" enableMouse="true" enableKeyboard="false" virtual="true" hidden="true">
+    <Size x="550" y="320"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorItemHistoryFrameMixin); if self:GetName() then self.Title = _G[self:GetName() .. 'Title'] end</OnLoad><OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentDataProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorShoppingHistoricalPriceProviderMixin); if self:GetParent() then self:GetParent().DataProvider = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        </Scripts>
+      </Frame>
+
+      <Frame inherits="AuctionatorResultsListingTemplate" name="$parentResultsListing">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="8" y="-30"/>
+          <Anchor point="BOTTOMRIGHT" x="-26" y="32"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().ResultsListing = self end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorInsetDarkTemplate" name="$parentInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-5" y="-25" relativeTo="$parentResultsListing"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentResultsListing"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().Inset = self end</OnLoad></Scripts></Frame>
+
+      <!-- Action Buttons -->
+      <Button inherits="UIPanelButtonTemplate" name="$parentDock">
+        <Size x="32" y="22"/>
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" x="20" y="-3" relativeTo="$parentInset"/>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <Texture file="Interface\RAIDFRAME\UI-RAIDFRAME-ARROW" name="$parentArrow">
+              <Size x="26" y="26"/>
+              <Anchors>
+                <Anchor point="CENTER" x="-1" y="-1"/>
+              </Anchors>
+            </Texture>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().Dock = self end; if self:GetName() then self.Arrow = _G[self:GetName() .. 'Arrow'] end</OnLoad><OnClick>self:GetParent():OnDockDialogClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_CLOSE" name="$parentClose">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" relativeTo="$parentDock"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().Close = self end</OnLoad><OnClick>self:GetParent():OnCloseDialogClicked()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+
+    <Layers>
+      <Layer>
+        <FontString text="AUCTIONATOR_L_X_PRICE_HISTORY" inherits="GameFontHighlight" name="$parentTitle">
+          <Anchors>
+            <Anchor point="TOP" relativePoint="TOP" y="-10"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

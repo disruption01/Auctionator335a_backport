@@ -1,0 +1,60 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorSellingTabFrameTemplate" virtual="true" hidden="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorSellingTabMixin); if self:GetParent() then self:GetParent().AuctionatorSellingFrame = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+
+    <Anchors>
+      <Anchor point="TOP"/>
+      <Anchor point="LEFT" x="4"/>
+      <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-4" y="27"/>
+    </Anchors>
+
+    <Frames>
+      <Frame inherits="AuctionatorSaleItemFrameTemplate" name="$parentSaleItemFrame">
+        <Anchors>
+          <Anchor point="TOP" relativePoint="TOP" y="-38"/>
+          <Anchor point="LEFT" relativePoint="LEFT" x="70"/>
+        </Anchors>
+      <Scripts>
+        <OnLoad>Mixin(self, AuctionatorSaleItemMixin); if self:GetParent() then self:GetParent().SaleItemFrame = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+        <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+        <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      </Scripts></Frame>
+
+      <Frame inherits="AuctionatorSellingBagFrame" name="$parentBagListing">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="4" y="-180"/>
+          <Anchor point="BOTTOM" y="5"/>
+        </Anchors>
+      <Scripts>
+        <OnLoad>Mixin(self, AuctionatorBagUseMixin); if self:GetParent() then self:GetParent().BagListing = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+        <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+        <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      </Scripts></Frame>
+
+      <Frame inherits="AuctionatorInsetTemplate" name="$parentBagInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="-5" y="5" relativeTo="$parentBagListing"/>
+          <Anchor point="BOTTOMRIGHT" y="-3" relativeTo="$parentBagListing"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().BagInset = self end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorBuyFrameTemplateForSelling" name="$parentBuyFrame">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" y="10" x="10" relativeTo="$parentBagListing"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+      <Scripts>
+        <OnLoad>Mixin(self, AuctionatorBuyFrameMixinForSelling); if self:GetParent() then self:GetParent().BuyFrame = self end</OnLoad>
+        <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+        <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+        <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+      </Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>

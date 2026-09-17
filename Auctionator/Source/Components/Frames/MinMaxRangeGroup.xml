@@ -1,0 +1,110 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationMinMaxFrame" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <KeyValues>
+        <KeyValue key="titleText" value="" type="string"/>
+        <KeyValue key="tooltipTitleText" value="" type="string"/>
+        <KeyValue key="tooltipText" value="" type="string"/>
+      </KeyValues>
+    -->
+    <Size y="50" x="150"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigMinMaxMixin); if self:GetName() then self.Title = _G[self:GetName() .. 'Title'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+    </Scripts>
+
+    <Anchors>
+      <Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parent"/>
+    </Anchors>
+
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString inherits="GameFontHighlight" justifyH="CENTER" name="$parentTitle">
+          <Size x="115" y="20"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" x="25"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+
+      <Layer level="ARTWORK">
+        <FontString inherits="GameFontHighlight" justifyH="CENTER" text="-">
+          <Size x="15" y="20"/>
+          <Anchors>
+            <Anchor point="CENTER" relativePoint="CENTER" y="-19" x="-3" relativeTo="$parentTitle"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+
+    <Frames>
+      <EditBox autoFocus="false" inherits="InputBoxTemplate" letters="10" name="$parentMinBox">
+        <Size x="50" y="20"/>
+
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTitle"/>
+        </Anchors>
+
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontNormalSmall" text="AUCTIONATOR_L_MIN" justifyH="CENTER">
+              <Size x="50"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().MinBox = self end</OnLoad><OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEnterPressed>self:GetParent():OnEnterPressed()</OnEnterPressed>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnTabPressed>self:GetParent():MinTabPressed()</OnTabPressed>
+          <OnTextChanged>if Auctionator_EditBox_OnTextChanged then Auctionator_EditBox_OnTextChanged(self, userInput) end</OnTextChanged>
+          <OnKeyDown>if Auctionator_EditBox_OnKeyDown then Auctionator_EditBox_OnKeyDown(self, key) end</OnKeyDown>
+        </Scripts>
+      </EditBox>
+
+      <EditBox autoFocus="false" inherits="InputBoxTemplate" letters="10" name="$parentMaxBox">
+        <Size x="50" y="20"/>
+
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="15" relativeTo="$parentMinBox"/>
+        </Anchors>
+
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontNormalSmall" text="AUCTIONATOR_L_MAX" justifyH="CENTER">
+              <Size x="50"/>
+              <Anchors>
+                <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().MaxBox = self end</OnLoad><OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEnterPressed>self:GetParent():OnEnterPressed()</OnEnterPressed>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnTabPressed>self:GetParent():MaxTabPressed()</OnTabPressed>
+          <OnTextChanged>if Auctionator_EditBox_OnTextChanged then Auctionator_EditBox_OnTextChanged(self, userInput) end</OnTextChanged>
+          <OnKeyDown>if Auctionator_EditBox_OnKeyDown then Auctionator_EditBox_OnKeyDown(self, key) end</OnKeyDown>
+        </Scripts>
+      </EditBox>
+
+      <Button inherits="AuctionatorResetButton" name="$parentResetButton">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="3" y="-3" relativeTo="$parentMaxBox"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+    </Frames>
+  </Frame>
+</Ui>

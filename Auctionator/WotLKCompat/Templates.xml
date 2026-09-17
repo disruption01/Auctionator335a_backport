@@ -1,0 +1,32 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Button name="UIPanelDynamicResizeButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true">
+    <Size x="90" y="22"/>
+    <Scripts><OnLoad>Mixin(self, AuctionatorCompatDynamicButtonMixin); self:OnLoad()</OnLoad></Scripts>
+  </Button>
+
+  <Frame name="ResizeLayoutFrame" virtual="true">
+    <Scripts><OnLoad>Mixin(self, ResizeLayoutFrameMixin)</OnLoad></Scripts>
+  </Frame>
+  <Frame name="NineSlicePanelTemplate" virtual="true"/>
+  <Frame name="InsetFrameTemplate4" virtual="true"/>
+
+  <Frame name="ButtonFrameTemplate" virtual="true">
+    <Layers><Layer level="ARTWORK"><FontString name="$parentTitleText" inherits="GameFontNormalLarge"><Anchors><Anchor point="TOP" y="-14"/></Anchors></FontString></Layer></Layers>
+    <Frames>
+      <Frame name="$parentInset" inherits="InsetFrameTemplate4">
+        <Anchors><Anchor point="TOPLEFT" x="4" y="-25"/><Anchor point="BOTTOMRIGHT" x="-4" y="30"/></Anchors>
+        <Scripts><OnLoad>if self:GetParent() then self:GetParent().Inset=self end</OnLoad></Scripts>
+      </Frame>
+      <Button name="$parentCloseButton" inherits="UIPanelCloseButton"><Anchors><Anchor point="TOPRIGHT" x="-4" y="-4"/></Anchors></Button>
+    </Frames>
+    <Scripts><OnLoad>self.TitleText=_G[(self:GetName() or '')..'TitleText']; self.CloseButton=_G[(self:GetName() or '')..'CloseButton']; self.Inset=_G[(self:GetName() or '')..'Inset'] or self.Inset; Mixin(self,ButtonFrameMixin)</OnLoad></Scripts>
+  </Frame>
+
+  <Button name="TabButtonTemplate" inherits="UIPanelButtonTemplate" virtual="true"><Size x="100" y="24"/></Button>
+  <Button name="UIMenuButtonStretchTemplate" inherits="UIPanelButtonTemplate" virtual="true"><Size x="120" y="22"/></Button>
+  <Button name="WowStyle1DropdownTemplate" inherits="UIPanelButtonTemplate" virtual="true"><Size x="180" y="22"/></Button>
+  <CheckButton name="UIRadioButtonTemplate" inherits="UICheckButtonTemplate" virtual="true"/>
+  <EditBox name="LargeInputBoxTemplate" inherits="InputBoxTemplate" autoFocus="false" virtual="true"><Size x="180" y="24"/></EditBox>
+  <EditBox name="SearchBoxTemplate" inherits="InputBoxTemplate" autoFocus="false" virtual="true"><Size x="180" y="20"/></EditBox>
+  <EditBox name="ScrollingEditBoxTemplate" multiLine="true" autoFocus="false" virtual="true"><FontString inherits="ChatFontNormal"/><Scripts><OnTextChanged>if ScrollingEditBoxMixin.OnTextChanged then ScrollingEditBoxMixin.OnTextChanged(self) end</OnTextChanged></Scripts></EditBox>
+</Ui>

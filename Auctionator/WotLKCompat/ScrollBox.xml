@@ -1,0 +1,14 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="WowScrollBoxList" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorCompatScrollBoxMixin); self:OnLoad()</OnLoad>
+      <OnSizeChanged>if self.LayoutFrames then self:LayoutFrames() end</OnSizeChanged>
+    </Scripts>
+  </Frame>
+  <Frame name="WowScrollBox" inherits="WowScrollBoxList" virtual="true"/>
+  <Slider name="WowTrimScrollBar" orientation="VERTICAL" virtual="true">
+    <Size x="14" y="100"/>
+    <Scripts><OnLoad>Mixin(self, AuctionatorCompatScrollBarMixin); self:OnLoad()</OnLoad></Scripts>
+    <ThumbTexture file="Interface\Buttons\UI-ScrollBar-Knob"><Size x="16" y="24"/></ThumbTexture>
+  </Slider>
+</Ui>

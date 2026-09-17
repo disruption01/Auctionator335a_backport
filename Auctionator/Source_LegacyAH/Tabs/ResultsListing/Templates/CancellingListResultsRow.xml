@@ -1,0 +1,16 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorCancellingListResultsRowTemplate" inherits="AuctionatorResultsRowTemplate" virtual="true" enableMouse="true">
+    <Layers>
+      <Layer level="OVERLAY">
+        <Texture alphaMode="ADD" hidden="true" file="Interface\Tooltips\UI-Tooltip-Background" name="$parentBidderHighlight">
+          <Color r="0.4" g="0" b="0.4" a="1"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+
+  <Scripts><OnLoad>Mixin(self, AuctionatorCancellingListResultsRowMixin); if self:GetName() then self.BidderHighlight = _G[self:GetName() .. 'BidderHighlight'] end</OnLoad></Scripts></Frame>
+</Ui>

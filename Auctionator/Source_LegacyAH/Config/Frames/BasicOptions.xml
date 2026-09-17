@@ -1,0 +1,51 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigBasicOptionsFrameTemplate" virtual="true">
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigBasicOptionsFrameMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.Save then self:Save() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorConfigurationTitleFrame" name="$parentTitleArea">
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationTitleFrameMixin); if self:GetParent() then self:GetParent().TitleArea = self end; self.titleText = AUCTIONATOR_L_CONFIG_BASIC_OPTIONS_CATEGORY; self.subTitleText = AUCTIONATOR_L_CONFIG_BASIC_OPTIONS_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationHeadingFrame" name="$parentDefaultTabHeading">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTitleArea"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationHeadingMixin); if self:GetParent() then self:GetParent().DefaultTabHeading = self end; self.headingText = AUCTIONATOR_L_DEFAULT_TAB; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorDropDown" name="$parentDefaultTab">
+       <Anchors>
+         <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentDefaultTabHeading"/>
+       </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorDropDownMixin); if self:GetParent() then self:GetParent().DefaultTab = self end; self.labelText = AUCTIONATOR_L_DEFAULT_TAB_TEXT; self.textString = 'NONE;SHOPPING_TAB;SELLING_TAB;CANCELLING_TAB;AUCTIONATOR'; self.valuesString = '0;1;2;3;4'; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationHeadingFrame" name="$parentCraftingInfoHeading">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentDefaultTab"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationHeadingMixin); if self:GetParent() then self:GetParent().CraftingInfoHeading = self end; self.headingText = AUCTIONATOR_L_CRAFTING_INFO; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentShowCraftingInfo">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentCraftingInfoHeading"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ShowCraftingInfo = self end; self.labelText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentShowCraftingCost">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentShowCraftingInfo"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ShowCraftingCost = self end; self.labelText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_COST; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_COST_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_COST_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentShowCraftingProfit">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentShowCraftingCost"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ShowCraftingProfit = self end; self.labelText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_PROFIT; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_PROFIT_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_CRAFTING_INFO_SHOW_PROFIT_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+   </Frames>
+  </Frame>
+</Ui>

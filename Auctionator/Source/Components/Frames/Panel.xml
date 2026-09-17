@@ -1,0 +1,24 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Frame name="AuctionatorPanelTemplate" virtual="true">
+  <Size x="338" y="424"/>
+  <Layers>
+    <Layer level="BACKGROUND">
+      <Texture file="Interface\FrameGeneral\UI-Background-Rock" horizTile="true" vertTile="true" name="$parentBg">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="0" y="-6"/>
+          <Anchor point="BOTTOMRIGHT" x="-2" y="3"/>
+        </Anchors>
+      </Texture>
+    </Layer>
+  </Layers>
+  <Frames>
+    <Frame inherits="AuctionatorInsetDarkTemplate" name="$parentInset">
+      <Anchors>
+        <Anchor point="TOPLEFT" x="4" y="-26"/>
+        <Anchor point="BOTTOMRIGHT" x="-6" y="26"/>
+      </Anchors>
+    <Scripts><OnLoad>if self:GetParent() then self:GetParent().Inset = self end</OnLoad></Scripts></Frame>
+    <Frame inherits="AuctionatorPanelBorderTemplate" name="$parentBorder"><Scripts><OnLoad>if self:GetParent() then self:GetParent().Border = self end</OnLoad></Scripts></Frame>
+  </Frames>
+<Scripts><OnLoad>if self:GetName() then self.Bg = _G[self:GetName() .. 'Bg'] end</OnLoad></Scripts></Frame>
+</Ui>

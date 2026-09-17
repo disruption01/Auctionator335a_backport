@@ -1,0 +1,55 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	<EditBox name="AuctionatorRetailImportLargeMoneyInputBoxTemplate" inherits="AuctionatorRetailImportLargeInputBoxTemplate" numeric="true" autoFocus="false" virtual="true">
+		<!-- iconAtlas: The atlas to use for the money icon.
+		<KeyValues>
+			<KeyValue key="iconAtlas" value="auctionhouse-icon-coin-gold" type="string"/>
+		</KeyValues>
+		-->
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentIcon">
+					<Size x="12" y="14"/>
+					<Anchors>
+						<Anchor point="RIGHT" x="-10" y="2"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>Mixin(self, AuctionatorRetailImportLargeMoneyInputBoxMixin); if self:GetName() then self.Icon = _G[self:GetName() .. 'Icon'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+			<OnTextChanged>if self.OnTextChanged then self:OnTextChanged(userInput) end</OnTextChanged>
+		</Scripts>
+	</EditBox>
+
+	<Frame name="AuctionatorRetailImportLargeMoneyInputFrameTemplate" virtual="true">
+		<!-- hideCopper: Hide the copper display for this input frame.
+		<KeyValues>
+			<KeyValue key="hideCopper" value="true" type="boolean"/>
+		</KeyValues>
+		-->
+		<Frames>
+			<EditBox letters="2" inherits="AuctionatorRetailImportLargeMoneyInputBoxTemplate" name="$parentCopperBox" autoFocus="false">
+				<Size x="50" y="33"/>
+				<Anchors>
+					<Anchor point="RIGHT"/>
+				</Anchors>
+			<Scripts><OnLoad>Mixin(self, AuctionatorRetailImportLargeMoneyInputBoxMixin); if self:GetParent() then self:GetParent().CopperBox = self end; self.iconAtlas = 'auctionhouse-icon-coin-copper'; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></EditBox>
+			<EditBox letters="2" inherits="AuctionatorRetailImportLargeMoneyInputBoxTemplate" name="$parentSilverBox" autoFocus="false">
+				<Size x="50" y="33"/>
+				<Anchors>
+					<Anchor point="RIGHT" relativePoint="LEFT" x="-6" y="0" relativeTo="$parentCopperBox"/>
+				</Anchors>
+			<Scripts><OnLoad>Mixin(self, AuctionatorRetailImportLargeMoneyInputBoxMixin); if self:GetParent() then self:GetParent().SilverBox = self end; self.iconAtlas = 'auctionhouse-icon-coin-silver'; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></EditBox>
+      <!-- XXX: Changed letters to "6" rather than the original "7" -->
+			<EditBox letters="6" inherits="AuctionatorRetailImportLargeMoneyInputBoxTemplate" name="$parentGoldBox" autoFocus="false">
+				<Anchors>
+					<Anchor point="LEFT"/>
+					<Anchor point="RIGHT" relativePoint="LEFT" x="-6" y="0" relativeTo="$parentSilverBox"/>
+				</Anchors>
+			<Scripts><OnLoad>Mixin(self, AuctionatorRetailImportLargeMoneyInputBoxMixin); if self:GetParent() then self:GetParent().GoldBox = self end; self.iconAtlas = 'auctionhouse-icon-coin-gold'; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>Mixin(self, AuctionatorRetailImportLargeMoneyInputFrameMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

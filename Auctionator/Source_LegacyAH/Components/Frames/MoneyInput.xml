@@ -1,0 +1,42 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- Template for money input with label -->
+  <Frame name="AuctionatorConfigurationMoneyInput" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <KeyValues>
+        <KeyValue key="value" value="0" type="number"/>
+        <KeyValue key="labelText" value="" type="string"/>
+        <KeyValue key="tooltipTitleText" value="" type="string"/>
+        <KeyValue key="tooltipText" value="" type="string"/>
+      </KeyValues>
+    -->
+    <Size y="35"/>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigMoneyInputMixin); if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parent"/>
+      <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent"/>
+    </Anchors>
+    <Frames>
+      <Frame inherits="AuctionatorRetailImportLargeMoneyInputFrameTemplate" name="$parentMoneyInput">
+        <Size x="200" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="25" y="-4" relativeTo="$parent"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorRetailImportLargeMoneyInputFrameMixin); if self:GetParent() then self:GetParent().MoneyInput = self end; if self.OnLoad then self:OnLoad() end</OnLoad><OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+        </Scripts>
+      </Frame>
+    </Frames>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString inherits="GameFontHighlight" name="$parentLabel">
+          <Anchors>
+            <Anchor point="LEFT" relativePoint="RIGHT" x="5" relativeTo="$parentMoneyInput"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

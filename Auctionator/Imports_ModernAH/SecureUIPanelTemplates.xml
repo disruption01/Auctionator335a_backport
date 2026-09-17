@@ -1,0 +1,3 @@
+<Ui>
+  <EditBox autoFocus="false" name="AuctionatorRetailImportLargeInputBoxTemplate" inherits="LargeInputBoxTemplate" virtual="true" />
+</Ui>

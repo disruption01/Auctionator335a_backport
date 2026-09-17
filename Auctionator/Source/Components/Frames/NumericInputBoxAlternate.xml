@@ -1,0 +1,45 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <!-- Template for a simple input box -->
+  <Frame name="AuctionatorConfigurationNumericInputAlternate" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <KeyValues>
+        <KeyValue key="labelText" value="" type="string"/>
+        <KeyValue key="tooltipTitleText" value="" type="string"/>
+        <KeyValue key="tooltipText" value="" type="string"/>
+      </KeyValues>
+    -->
+    <Size y="40"/>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigNumericInputMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnMouseUp>if self.OnMouseUp then self:OnMouseUp(button) end</OnMouseUp>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parent"/>
+      <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent"/>
+    </Anchors>
+    <Frames>
+      <EditBox autoFocus="false" inherits="AuctionatorRetailImportLargeInputBoxTemplate" numeric="true" letters="10" name="$parentInputBox">
+        <Size x="70" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="120"/>
+        </Anchors>
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontHighlight" name="$parentLabel">
+              <Anchors>
+                <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" x="-10" y="-4" relativeTo="$parent"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().InputBox = self end; if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end</OnLoad><OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnEnterPressed>Auctionator.Components.ReportEnterPressed()</OnEnterPressed>
+        </Scripts>
+      </EditBox>
+    </Frames>
+  </Frame>
+</Ui>

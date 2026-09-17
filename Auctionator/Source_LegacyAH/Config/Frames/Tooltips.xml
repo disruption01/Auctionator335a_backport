@@ -1,0 +1,63 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigTooltipsFrameTemplate" virtual="true">
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigTooltipsFrameMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.Save then self:Save() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorConfigurationTitleFrame" name="$parentTitleArea">
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationTitleFrameMixin); if self:GetParent() then self:GetParent().TitleArea = self end; self.titleText = AUCTIONATOR_L_CONFIG_TOOLTIPS_CATEGORY; self.subTitleText = AUCTIONATOR_L_CONFIG_TOOLTIPS_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentAuctionTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTitleArea"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().AuctionTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_AUCTION_TOOLTIP; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentMailboxTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAuctionTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().MailboxTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_MAIL_TOOLTIP; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentVendorTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentMailboxTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().VendorTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_VENDOR_TOOLTIP; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentEnchantTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentVendorTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().EnchantTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_ENCHANT_GENERIC_TOOLTIP; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentProspectTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentEnchantTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ProspectTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_PROSPECT_TOOLTIP; self.tooltipTitleText = AUCTIONATOR_L_PROSPECT_TOOLTIP_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_PROSPECT_TOOLTIP_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentMillTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentProspectTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().MillTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_MILL_TOOLTIP; self.tooltipTitleText = AUCTIONATOR_L_MILL_TOOLTIP_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_MILL_TOOLTIP_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentAuctionAgeTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentMillTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().AuctionAgeTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_AUCTION_AGE_TOOLTIP; self.tooltipTitleText = AUCTIONATOR_L_AUCTION_AGE_TOOLTIP_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_AUCTION_AGE_TOOLTIP_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentShiftStackTooltips">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAuctionAgeTooltips"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ShiftStackTooltips = self end; self.labelText = AUCTIONATOR_L_CONFIG_STACK_TOOLTIP; self.tooltipTitleText = AUCTIONATOR_L_STACK_TOOLTIP_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_STACK_TOOLTIP_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>

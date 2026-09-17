@@ -1,0 +1,91 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Button name="AuctionatorStackOfInputNumStacksTemplate" virtual="true">
+    <Size x="50" y="15"/>
+    <NormalFont style="GameFontNormalSmall"/>
+    <HighlightFont style="GameFontHighlightSmall"/>
+    <HighlightTexture inherits="UIPanelButtonHighlightTexture">
+      <Anchors>
+        <Anchor point="TOPLEFT" x="-10" y="5" relativeTo="$parent"/>
+        <Anchor point="BOTTOMRIGHT" x="10" y="-5" relativeTo="$parent"/>
+      </Anchors>
+    </HighlightTexture>
+  </Button>
+  <!-- Template for a input for stacks and stack sizes  -->
+  <Frame name="AuctionatorStackOfInputTemplate" virtual="true">
+    <!--
+      <KeyValues>
+        <KeyValue key="tooltipTitleText" value="" type="string"/>
+        <KeyValue key="tooltipText" value="" type="string"/>
+      </KeyValues>
+    -->
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorStackOfInputMixin); if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+      <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+    </Scripts>
+    <Size y="40"/>
+    <Anchors>
+      <Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parent"/>
+      <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent"/>
+    </Anchors>
+    <Frames>
+      <EditBox autoFocus="false" inherits="AuctionatorRetailImportLargeInputBoxTemplate" numeric="true" letters="10" name="$parentNumStacks">
+        <Size x="70" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+        </Anchors>
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().NumStacks = self end</OnLoad><OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnEnterPressed>Auctionator.Components.ReportEnterPressed()</OnEnterPressed>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnMouseWheel>self:SetNumber(math.max(0, self:GetNumber() + delta))</OnMouseWheel>
+        </Scripts>
+      </EditBox>
+      <Button inherits="AuctionatorStackOfInputNumStacksTemplate" text="AUCTIONATOR_L_MAX_COLON_X" name="$parentMaxNumStacks">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="10" y="-4" relativeTo="$parentNumStacks"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().MaxNumStacks = self end</OnLoad><OnClick>
+            self:GetParent():MaxNumStacksClicked()
+          </OnClick>
+        </Scripts>
+      </Button>
+    <EditBox autoFocus="false" inherits="AuctionatorRetailImportLargeInputBoxTemplate" numeric="true" letters="10" name="$parentStackSize">
+        <Size x="70" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="10" y="3" relativeTo="$parentLabel"/>
+        </Anchors>
+        <FontString inherits="ChatFontNormal" justifyH="CENTER"/>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().StackSize = self end</OnLoad><OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+          <OnEnterPressed>Auctionator.Components.ReportEnterPressed()</OnEnterPressed>
+          <OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnMouseWheel>self:SetNumber(math.max(0, self:GetNumber() + delta))</OnMouseWheel>
+        </Scripts>
+      </EditBox>
+      <Button inherits="AuctionatorStackOfInputNumStacksTemplate" text="AUCTIONATOR_L_MAX_COLON_X" name="$parentMaxStackSize">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="10" y="-4" relativeTo="$parentStackSize"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().MaxStackSize = self end</OnLoad><OnClick>
+            self:GetParent():MaxStackSizeClicked()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString inherits="GameFontHighlight" text="AUCTIONATOR_L_STACK_OF" name="$parentLabel">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="10" y="-3" relativeTo="$parentNumStacks"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    </Frame>
+</Ui>

@@ -1,0 +1,62 @@
+<Ui>
+	<!--
+*******************************************************************************
+	ColumnDisplayTemplate
+	This template will handle the column headers for a list. Currently, any
+	adjoining scroll frame or list needs to be spaced manually to line up with
+	the columns. It might be cool to support an API for displaying data with
+	default behavior. That would lose us some flexibility though, and is
+	outside the current scope (when this comment was written).
+*******************************************************************************
+-->
+
+	<Button name="AuctionatorRetailImportColumnDisplayButtonShortTemplate" virtual="true">
+		<Size x="10" y="19"/>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture file="Interface\FriendsFrame\WhoFrame-ColumnTabs" name="$parentLeft">
+					<Size x="5" y="19"/>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+					<TexCoords left="0" right="0.078125" top="0" bottom="0.59375"/>
+				</Texture>
+				<Texture file="Interface\FriendsFrame\WhoFrame-ColumnTabs" name="$parentRight">
+					<Size x="4" y="19"/>
+					<Anchors>
+						<Anchor point="BOTTOMRIGHT"/>
+					</Anchors>
+					<TexCoords left="0.90625" right="0.96875" top="0" bottom="0.59375"/>
+				</Texture>
+				<Texture file="Interface\FriendsFrame\WhoFrame-ColumnTabs" name="$parentMiddle">
+					<Size x="0" y="19"/>
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentLeft"/>
+						<Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parentRight"/>
+					</Anchors>
+					<TexCoords left="0.078125" right="0.90625" top="0" bottom="0.59375"/>
+				</Texture>
+			</Layer>
+		</Layers>
+		<ButtonText name="$parentText">
+			<Anchors>
+				<Anchor point="LEFT" x="8" y="0"/>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontHighlightSmall"/>
+		<HighlightTexture file="Interface\PaperDollInfoFrame\UI-Character-Tab-Highlight" alphaMode="ADD">
+			<Anchors>
+				<Anchor point="TOPLEFT" x="0" y="0"/>
+				<Anchor point="BOTTOMRIGHT" x="4" y="-2"/>
+			</Anchors>
+		</HighlightTexture>
+	<Scripts><OnLoad>if self:GetName() then self.Left = _G[self:GetName() .. 'Left'] end; if self:GetName() then self.Right = _G[self:GetName() .. 'Right'] end; if self:GetName() then self.Middle = _G[self:GetName() .. 'Middle'] end; if self:GetName() then self.Text = _G[self:GetName() .. 'Text'] end</OnLoad></Scripts></Button>
+
+	<Button name="AuctionatorRetailImportUIStaticPopupSpecialCloseButton" inherits="UIPanelCloseButton" virtual="true">
+		<Scripts>
+			<OnClick>
+        StaticPopupSpecial_Hide(self:GetParent());
+      </OnClick>
+		</Scripts>
+	</Button>
+</Ui>

@@ -1,0 +1,61 @@
+<Ui>
+  <Frame name="AuctionatorBuyHistoryPricesFrameTemplate" virtual="true">
+    <Frames>
+      <Frame name="$parentRealmHistoryDataProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorBuyingRealmHistoryDataProviderMixin); if self:GetParent() then self:GetParent().RealmHistoryDataProvider = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        </Scripts>
+      </Frame>
+      <Frame inherits="AuctionatorResultsListingTemplate" name="$parentRealmHistoryResultsListing">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" x="-20"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().RealmHistoryResultsListing = self end</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentPostingHistoryDataProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorBuyingPostingHistoryProviderMixin); if self:GetParent() then self:GetParent().PostingHistoryDataProvider = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        </Scripts>
+      </Frame>
+      <Frame inherits="AuctionatorResultsListingTemplate" name="$parentPostingHistoryResultsListing">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" x="-20"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().PostingHistoryResultsListing = self end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorInsetTemplate" name="$parentInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-10" y="-25" relativeTo="$parentRealmHistoryResultsListing"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" y="2" relativeTo="$parentRealmHistoryResultsListing"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().Inset = self end</OnLoad></Scripts></Frame>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_YOUR_HISTORY" name="$parentPostingHistoryButton">
+        <Anchors>
+          <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentRealmHistoryResultsListing"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-8" y="10"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().PostingHistoryButton = self end</OnLoad><OnClick>
+            self:GetParent():SelectPostingHistory()
+          </OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_REALM_HISTORY" name="$parentRealmHistoryButton">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentPostingHistoryButton"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().RealmHistoryButton = self end</OnLoad><OnClick>
+            self:GetParent():SelectRealmHistory()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  <Scripts><OnLoad>Mixin(self, AuctionatorBuyHistoryPricesFrameMixin)</OnLoad></Scripts></Frame>
+</Ui>

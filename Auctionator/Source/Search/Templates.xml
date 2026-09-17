@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorDirectSearchProviderTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorDirectSearchProviderMixin)</OnLoad><OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+  </Frame>
+</Ui>

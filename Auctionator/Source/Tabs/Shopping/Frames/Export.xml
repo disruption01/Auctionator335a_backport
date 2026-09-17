@@ -1,0 +1,119 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorExportListTemplate" inherits="AuctionatorSimplePanelTemplate" frameStrata="Dialog" enableMouse="true" virtual="true" hidden="true">
+    <Size x="350" y="320"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorListExportFrameMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorInsetDarkTemplate" name="$parentInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="4" y="-30"/>
+          <Anchor point="BOTTOMRIGHT" x="-6" y="32"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().Inset = self end</OnLoad></Scripts></Frame>
+
+      <Slider inherits="WowTrimScrollBar" name="$parentScrollBar">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parentInset"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentInset"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBar = self end</OnLoad></Scripts></Slider>
+
+      <Frame inherits="WowScrollBox" name="$parentScrollBox">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="5" y="-6" relativeTo="$parentInset"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" y="4" relativeTo="$parentScrollBar"/>
+        </Anchors>
+        <Frames>
+          <Frame inherits="ResizeLayoutFrame" name="$parentListListingFrame">
+            <Scripts><OnLoad>if self:GetParent() then self:GetParent().ListListingFrame = self end; self.scrollable = true</OnLoad></Scripts></Frame>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBox = self end</OnLoad></Scripts></Frame>
+
+      <!-- Export options -->
+      <!-- TODO: Uncomment this to continue working on export via whisper -->
+      <!-- <Frame inherits="AuctionatorConfigurationRadioButtonGroup" parentKey="ExportOption">
+        <KeyValues>
+          <KeyValue key="groupHeadingText" value="AUCTIONATOR_L_EXPORT_AS" type="global"/>
+        </KeyValues>
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativeKey="$parent" relativePoint="BOTTOMLEFT" y="32" x="4" />
+          <Anchor point="RIGHT" relativeKey="$parent" relativePoint="CENTER" />
+        </Anchors>
+        <Frames>
+          <Frame inherits="AuctionatorConfigurationRadioButton">
+            <KeyValues>
+              <KeyValue key="labelText" value="AUCTIONATOR_L_EXPORT_STRING" type="global"/>
+              <KeyValue key="value" value="0" type="number"/>
+            </KeyValues>
+          </Frame>
+          <Frame inherits="AuctionatorConfigurationRadioButton">
+            <KeyValues>
+              <KeyValue key="labelText" value="AUCTIONATOR_L_EXPORT_WHISPER" type="global"/>
+              <KeyValue key="value" value="1" type="number"/>
+            </KeyValues>
+          </Frame>
+        </Frames>
+      </Frame>
+
+      <Frame parentKey="Recipient" inherits="AuctionatorConfigurationTextInput" hidden="true">
+        <Anchors>
+          <Anchor point="LEFT" relativeKey="$parent" relativePoint="CENTER" />
+          <Anchor point="BOTTOMRIGHT" relativeKey="$parent.Inset" relativePoint="BOTTOMRIGHT" />
+          <Anchor point="BOTTOMLEFT" relativeKey="$parent.ExportOption" relativePoint="BOTTOMRIGHT" y="7" />
+        </Anchors>
+      </Frame> -->
+
+      <!-- Action Buttons -->
+      <Button inherits="UIPanelCloseButton" name="$parentCloseDialog">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().CloseDialog = self end</OnLoad><OnClick>self:GetParent():OnCloseDialogClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_EXPORT" name="$parentExport">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" y="-3" relativeTo="$parentInset"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().Export = self end</OnLoad><OnClick>self:GetParent():OnExportClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_SELECT_ALL" name="$parentSelectAll">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" y="-3" relativeTo="$parentInset"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().SelectAll = self end</OnLoad><OnClick>self:GetParent():OnSelectAllClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_UNSELECT_ALL" name="$parentUnselectAll">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentSelectAll"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().UnselectAll = self end</OnLoad><OnClick>self:GetParent():OnUnselectAllClicked()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+
+    <Layers>
+      <Layer>
+        <FontString text="AUCTIONATOR_L_LIST_EXPORT_HEADER" inherits="GameFontHighlight">
+          <Anchors>
+            <Anchor point="TOP" relativePoint="TOP" y="-10"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationCopyAndPasteFrame" inherits="AuctionatorConfigurationTooltip" virtual="true">
+    <!--
+      <KeyValues>
+        <KeyValue key="labelText" value="" type="string"/>
+        <KeyValue key="copyText" value="" type="string" />
+        <KeyValue key="tooltipTitleText" value="" type="string"/>
+        <KeyValue key="tooltipText" value="" type="string"/>
+      </KeyValues>
+    -->
+    <Size y="40"/>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigurationCopyAndPasteMixin); if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="LEFT" relativePoint="LEFT" relativeTo="$parent"/>
+      <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent"/>
+    </Anchors>
+    <Frames>
+      <EditBox autoFocus="false" inherits="InputBoxTemplate" letters="150" name="$parentInputBox">
+        <Size x="295" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" x="20"/>
+        </Anchors>
+        <FontString inherits="ChatFontNormal" justifyH="LEFT"/>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().InputBox = self end</OnLoad><OnEnter>self:GetParent():OnEnter()</OnEnter>
+          <OnLeave>self:GetParent():OnLeave()</OnLeave>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+        </Scripts>
+      </EditBox>
+    </Frames>
+
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString inherits="GameFontHighlight" name="$parentLabel">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="8" y="-4" relativeTo="$parentInputBox"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

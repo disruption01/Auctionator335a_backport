@@ -1,0 +1,22 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorStringColumnHeaderTemplate" inherits="AuctionatorRetailImportColumnDisplayButtonShortTemplate" enableMouse="true" virtual="true">
+    <Size y="19"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorStringColumnHeaderTemplateMixin); if self:GetParent() then self:GetParent().header = self end; if self:GetName() then self.Arrow = _G[self:GetName() .. 'Arrow'] end</OnLoad><OnClick>if self.OnClick then self:OnClick(button, down) end</OnClick>
+      <OnMouseUp>if self.OnMouseUp then self:OnMouseUp(button) end</OnMouseUp>
+      <OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+      <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+    </Scripts>
+
+    <Layers>
+      <Layer level="OVERLAY">
+        <Texture hidden="true" file="Interface\Buttons\UI-SortArrow" name="$parentArrow">
+          <Anchors>
+            <Anchor point="RIGHT" relativePoint="RIGHT" x="-3" y="0" relativeTo="$parentText"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

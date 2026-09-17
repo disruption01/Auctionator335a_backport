@@ -1,0 +1,21 @@
+<Ui>
+  <Frame name="AuctionatorDurationHorizontalRadioControls" inherits="AuctionatorConfigurationHorizontalRadioButtonGroup" virtual="true">
+    <Frames>
+      <Frame inherits="AuctionatorConfigurationRadioButton">
+        <Anchors>
+          <Anchor point="RIGHT" x="-180"/>
+        </Anchors>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigRadioButtonMixin); self.labelText = Auctionator.Constants.Durations.Short; self.value = 12; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationRadioButton">
+        <Anchors>
+          <Anchor point="RIGHT" x="-130"/>
+        </Anchors>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigRadioButtonMixin); self.labelText = Auctionator.Constants.Durations.Medium; self.value = 24; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationRadioButton">
+        <Anchors>
+          <Anchor point="RIGHT" x="-80"/>
+        </Anchors>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigRadioButtonMixin); self.labelText = Auctionator.Constants.Durations.Long; self.value = 48; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+    </Frames>
+  <Scripts><OnLoad>Mixin(self, AuctionatorConfigHorizontalRadioButtonGroupMixin); self.groupHeadingText = AUCTIONATOR_L_DURATION; if self.InitializeRadioButtonGroup then self:InitializeRadioButtonGroup() end</OnLoad></Scripts></Frame>
+</Ui>

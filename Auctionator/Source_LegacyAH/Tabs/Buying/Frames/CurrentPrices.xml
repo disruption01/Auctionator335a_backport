@@ -1,0 +1,90 @@
+<Ui>
+  <Frame name="AuctionatorBuyCurrentPricesFrameTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorBuyCurrentPricesFrameMixin)</OnLoad><OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+    <Frames>
+      <Frame name="$parentSearchDataProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorBuyAuctionsDataProviderMixin); if self:GetParent() then self:GetParent().SearchDataProvider = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        </Scripts>
+      </Frame>
+
+      <Frame inherits="AuctionatorResultsListingTemplate" name="$parentSearchResultsListing">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT" x="-20"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().SearchResultsListing = self end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorInsetTemplate" name="$parentInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-10" y="-25" relativeTo="$parentSearchResultsListing"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" y="2" relativeTo="$parentSearchResultsListing"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().Inset = self end</OnLoad></Scripts></Frame>
+
+      <Button inherits="AuctionatorLoadAllButton" text="AUCTIONATOR_L_LOAD_HIGHER_PRICES" name="$parentLoadAllPagesButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativeTo="$parentInset"/>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" y="20" relativeTo="$parentInset"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().LoadAllPagesButton = self end</OnLoad><OnClick>
+            self:GetParent():LoadAllPages()
+          </OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="AuctionatorLoadAllButton" text="AUCTIONATOR_L_STOP_LOADING_NOW" name="$parentStopLoadingNowButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativeTo="$parentInset"/>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" y="20" relativeTo="$parentInset"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().StopLoadingNowButton = self end</OnLoad><OnClick>
+            self:GetParent():StopLoadingPages()
+          </OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="CANCEL_AUCTION" name="$parentCancelButton">
+        <Anchors>
+          <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentSearchResultsListing"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-8" y="10"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().CancelButton = self end</OnLoad><OnClick>
+            self:GetParent():CancelFocussed()
+          </OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_BUY" name="$parentBuyButton">
+        <Anchors>
+          <Anchor point="LEFT" relativePoint="LEFT" x="-100" relativeTo="$parentCancelButton"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentCancelButton"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().BuyButton = self end</OnLoad><OnClick>
+            self:GetParent():BuyClicked()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_REFRESH" name="$parentRefreshButton">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentBuyButton"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().RefreshButton = self end</OnLoad><OnClick>
+            self:GetParent():DoRefresh()
+          </OnClick>
+        </Scripts>
+      </Button>
+      <Frame inherits="AuctionatorBuyDialogTemplate" name="$parentBuyDialog"><Scripts><OnLoad>Mixin(self, AuctionatorBuyDialogMixin); if self:GetParent() then self:GetParent().BuyDialog = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>

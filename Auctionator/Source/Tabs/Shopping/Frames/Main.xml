@@ -1,0 +1,203 @@
+<Ui>
+  <Frame name="AuctionatorShoppingTabListsContainerTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorShoppingTabListsContainerMixin); if self:GetParent() then self:GetParent().ListsContainer = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+  </Frame>
+
+  <Frame name="AuctionatorShoppingTabRecentsContainerTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorShoppingTabRecentsContainerMixin); if self:GetParent() then self:GetParent().RecentsContainer = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+  </Frame>
+
+  <Frame name="AuctionatorShoppingTabSearchOptionsTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorShoppingTabSearchOptionsMixin); if self:GetParent() then self:GetParent().SearchOptions = self end; if self:GetName() then self.SearchLabel = _G[self:GetName() .. 'SearchLabel'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+    </Scripts>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString inherits="GameFontNormal" text="AUCTIONATOR_L_SEARCH_TERM_COLON" name="$parentSearchLabel">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="80" y="-4"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <EditBox autoFocus="false" inherits="InputBoxTemplate" letters="100" name="$parentSearchString">
+        <Size x="180" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="10" y="4" relativeTo="$parentSearchLabel"/>
+        </Anchors>
+        <FontString inherits="ChatFontNormal" justifyH="LEFT"/>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().SearchString = self end</OnLoad><OnEnterPressed>self:GetParent().SearchButton:Click();self:ClearFocus()</OnEnterPressed>
+          <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+        </Scripts>
+      </EditBox>
+
+      <Button inherits="AuctionatorResetButton" name="$parentResetSearchStringButton">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="3" y="-2" relativeTo="$parentSearchString"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetSearchStringButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad><OnClick>self:GetParent().SearchString:SetText("")</OnClick>
+        </Scripts>
+      </Button>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_SEARCH" name="$parentSearchButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="5" y="-3" relativeTo="$parentResetSearchStringButton"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().SearchButton = self end</OnLoad></Scripts></Button>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_SEARCH_OPTIONS" name="$parentMoreButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="5" relativeTo="$parentSearchButton"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().MoreButton = self end</OnLoad></Scripts></Button>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_ADD_TO_LIST" name="$parentAddToListButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" x="5" relativeTo="$parentMoreButton"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().AddToListButton = self end</OnLoad></Scripts></Button>
+    </Frames>
+  </Frame>
+
+  <Frame name="AuctionatorShoppingTabFrameTemplate" virtual="true" hidden="true">
+    <Anchors>
+      <Anchor point="TOP" y="-40"/>
+      <Anchor point="LEFT"/>
+      <Anchor point="BOTTOMRIGHT" x="-4" y="27"/>
+    </Anchors>
+    <Size x="800" y="500"/>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorShoppingTabFrameMixin); if self:GetParent() then self:GetParent().AuctionatorShoppingTabFrame = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+    <Frames>
+      <Frame inherits="AuctionatorShoppingTabSearchOptionsTemplate" name="$parentSearchOptions">
+        <Anchors>
+          <Anchor point="TOP"/>
+          <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" y="-150"/>
+          <Anchor point="RIGHT"/>
+        </Anchors>
+        <Size x="280"/>
+      <Scripts><OnLoad>Mixin(self, AuctionatorShoppingTabSearchOptionsMixin); if self:GetParent() then self:GetParent().SearchOptions = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorShoppingTabListsContainerTemplate" hidden="true" name="$parentListsContainer">
+        <Anchors>
+          <Anchor point="TOP" y="-50"/>
+          <Anchor point="BOTTOM" y="35"/>
+          <Anchor point="LEFT"/>
+        </Anchors>
+        <Size x="280"/>
+        <Layers>
+          <Layer level="OVERLAY">
+            <Texture hidden="true" file="Interface\Tooltips\UI-Tooltip-Background" name="$parentLoadingSpinner">
+              <Size x="146" y="146"/>
+              <Anchors>
+                <Anchor point="CENTER" x="-12" y="-13" relativeTo="$parentListsContainer"/>
+              </Anchors>
+            </Texture>
+            <FontString inherits="GameFontNormal" hidden="true" name="$parentResultsText">
+              <Anchors>
+                <Anchor point="TOP" relativePoint="CENTER" relativeTo="$parentLoadingSpinner"/>
+                <Anchor point="LEFT" x="45"/>
+                <Anchor point="RIGHT" x="-67"/>
+              </Anchors>
+              <Shadow x="1" y="-1">
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Scripts><OnLoad>Mixin(self, AuctionatorShoppingTabListsContainerMixin); if self:GetParent() then self:GetParent().ListsContainer = self end; if self.OnLoad then self:OnLoad() end; if self:GetName() then self.LoadingSpinner = _G[self:GetName() .. 'LoadingSpinner'] end; if self:GetName() then self.ResultsText = _G[self:GetName() .. 'ResultsText'] end; self.SpinnerAnim = self.SpinnerAnim or {Play=function() end, Stop=function() end}</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorShoppingTabRecentsContainerTemplate" name="$parentRecentsContainer">
+        <Anchors>
+          <Anchor point="TOP" y="-50"/>
+          <Anchor point="BOTTOM" y="10"/>
+          <Anchor point="LEFT"/>
+        </Anchors>
+        <Size x="280"/>
+      <Scripts><OnLoad>Mixin(self, AuctionatorShoppingTabRecentsContainerMixin); if self:GetParent() then self:GetParent().RecentsContainer = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_NEW_LIST" name="$parentNewListButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" y="10" x="5"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().NewListButton = self end</OnLoad></Scripts></Button>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_EXPORT" name="$parentExportButton">
+        <Anchors>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="20" relativeTo="$parentRecentsContainer"/>
+          <Anchor point="BOTTOM" y="10"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ExportButton = self end</OnLoad></Scripts></Button>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_IMPORT" name="$parentImportButton">
+        <Anchors>
+          <Anchor point="RIGHT" relativePoint="LEFT" relativeTo="$parentExportButton"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ImportButton = self end</OnLoad></Scripts></Button>
+    <Frame name="$parentContainerTabs">
+        <Size x="10" y="10"/>
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorShoppingTabContainerTabsMixin); if self:GetParent() then self:GetParent().ContainerTabs = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+        </Scripts>
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" x="20" relativeTo="$parentListsContainer"/>
+        </Anchors>
+        <Frames>
+          <Button inherits="AuctionatorShoppingMiniTabButtonTemplate" text="AUCTIONATOR_L_SHOPPING_LISTS" id="1" name="$parentListsTab">
+            <Anchors>
+              <Anchor point="BOTTOMLEFT"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorShoppingListsMiniTabButtonMixinMixin); if self:GetParent() then self:GetParent().ListsTab = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+          <Button inherits="AuctionatorShoppingMiniTabButtonTemplate" text="AUCTIONATOR_L_RECENT_SEARCHES" id="2" name="$parentRecentsTab">
+            <Anchors>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="$parentListsTab"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorShoppingListsMiniTabButtonMixinMixin); if self:GetParent() then self:GetParent().RecentsTab = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+        </Frames>
+      </Frame>
+
+      <Frame name="$parentDataProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorShoppingTabDataProviderMixin); if self:GetParent() then self:GetParent().DataProvider = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        </Scripts>
+      </Frame>
+      <Frame inherits="AuctionatorDirectSearchProviderTemplate" name="$parentSearchProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorDirectSearchProviderMixin); if self:GetParent() then self:GetParent().SearchProvider = self end</OnLoad><OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+        </Scripts>
+      </Frame>
+
+      <Frame inherits="AuctionatorResultsListingTemplate" name="$parentResultsListing">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="5" y="27" relativeTo="$parentListsContainerScrollBar"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-20" relativeTo="$parent"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().ResultsListing = self end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorInsetTemplate" name="$parentShoppingResultsInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-10" y="-25" relativeTo="$parentResultsListing"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" y="2" relativeTo="$parentResultsListing"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ShoppingResultsInset = self end</OnLoad></Scripts></Frame>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_EXPORT_RESULTS" name="$parentExportCSV">
+        <Anchors>
+          <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentResultsListing"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-8" y="10"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().ExportCSV = self end</OnLoad><OnClick>self:GetParent():ExportCSVClicked()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+    </Frame>
+</Ui>

@@ -1,0 +1,27 @@
+<Ui>
+  <Frame name="AuctionatorCraftingInfoFrameTemplate" frameLevel="3" virtual="true">
+    <Size x="200" y="16"/>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorCraftingInfoFrameMixin); if self:GetName() then self.Total = _G[self:GetName() .. 'Total'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+    <Layers>
+      <Layer level="OVERLAY">
+        <FontString inherits="GameFontNormal" justifyH="LEFT" spacing="1.5" name="$parentTotal">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_SEARCH" name="$parentSearchButton">
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().SearchButton = self end</OnLoad><OnClick>
+            self:GetParent():SearchButtonClicked()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

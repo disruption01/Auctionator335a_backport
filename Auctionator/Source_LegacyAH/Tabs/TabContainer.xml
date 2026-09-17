@@ -1,0 +1,8 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorAHTabsContainerTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorTabContainerMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+  </Frame>
+</Ui>

@@ -1,0 +1,8 @@
+<Ui>
+  <Frame name="AuctionatorBagCacheTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorBagCacheMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+  </Frame>
+</Ui>

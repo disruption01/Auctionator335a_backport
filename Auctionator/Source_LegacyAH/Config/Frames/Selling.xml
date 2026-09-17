@@ -1,0 +1,121 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigSellingFrameTemplate" hidden="true" virtual="true">
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigSellingFrameMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.Save then self:Save() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorConfigurationTitleFrame" name="$parentTitleArea">
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationTitleFrameMixin); if self:GetParent() then self:GetParent().TitleArea = self end; self.titleText = AUCTIONATOR_L_CONFIG_SELLING_CATEGORY; self.subTitleText = AUCTIONATOR_L_CONFIG_SELLING_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Slider inherits="WowTrimScrollBar" name="$parentScrollBar">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentTitleArea"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBar = self end</OnLoad></Scripts></Slider>
+
+      <Frame inherits="WowScrollBox" name="$parentScrollBox">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTitleArea"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT" relativeTo="$parentScrollBar"/>
+        </Anchors>
+        <Frames>
+          <Frame inherits="ResizeLayoutFrame" name="$parentContent">
+            <Anchors>
+              <Anchor point="TOP"/>
+            </Anchors>
+            <Frames>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentAuctionChatLog">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().AuctionChatLog = self end; self.labelText = AUCTIONATOR_L_CONFIG_CHAT_LOG; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_CHAT_LOG_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_CHAT_LOG_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentShowBidPrice">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAuctionChatLog"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ShowBidPrice = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_SHOW_BID_PRICE; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_SHOW_BID_PRICE_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_SHOW_BID_PRICE_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentConfirmPostLowPrice">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentShowBidPrice"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ConfirmPostLowPrice = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_CONFIRM_LOW_PRICE; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_CONFIRM_LOW_PRICE_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_CONFIRM_LOW_PRICE_TOOLTIP_TEXT_2; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentAlwaysLoadMore">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentConfirmPostLowPrice"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().AlwaysLoadMore = self end; self.labelText = AUCTIONATOR_L_CONFIG_SHOPPING_ALWAYS_LOAD_MORE; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SHOPPING_ALWAYS_LOAD_MORE_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SHOPPING_ALWAYS_LOAD_MORE_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentGreyPostButton">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAlwaysLoadMore"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().GreyPostButton = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_GREY_POST_BUTTON; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_GREY_POST_BUTTON_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_GREY_POST_BUTTON_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationHeadingFrame" name="$parentBagHeading">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentGreyPostButton"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationHeadingMixin); if self:GetParent() then self:GetParent().BagHeading = self end; self.headingText = AUCTIONATOR_L_CONFIG_BAG; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentBagShown">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentBagHeading"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().BagShown = self end; self.labelText = AUCTIONATOR_L_CONFIG_BAG_SHOW_SELLING_BAG; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_BAG_SHOW_SELLING_BAG_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_BAG_SHOW_SELLING_BAG_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentBagCollapsed">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentBagShown"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().BagCollapsed = self end; self.labelText = AUCTIONATOR_L_CONFIG_BAG_COLLAPSED; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_BAG_COLLAPSED_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_BAG_COLLAPSED_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationNumericInput" name="$parentIconSize">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" y="-5" relativeTo="$parentBagCollapsed"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigNumericInputMixin); if self:GetParent() then self:GetParent().IconSize = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_ICON_SIZE; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_ICON_SIZE_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_ICON_SIZE_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentAutoSelectNext">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentIconSize"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().AutoSelectNext = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_NEXT; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_NEXT_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_NEXT_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentAutoSelectStackRemainder">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAutoSelectNext"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().AutoSelectStackRemainder = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_STACK_REMAINDER; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_STACK_REMAINDER_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_AUTO_SELECT_STACK_REMAINDER_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentReselectItem">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentAutoSelectStackRemainder"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().ReselectItem = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_RESELECT_ITEM; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_RESELECT_ITEM_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_RESELECT_ITEM_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentMissingFavourites">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentReselectItem"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().MissingFavourites = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_MISSING_FAVOURITES; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_MISSING_FAVOURITES_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_MISSING_FAVOURITES_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorConfigurationCheckbox" name="$parentPossessedFavouritesFirst">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentMissingFavourites"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigCheckboxMixin); if self:GetParent() then self:GetParent().PossessedFavouritesFirst = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_POSSESSED_FAVOURITES_FIRST; self.tooltipTitleText = AUCTIONATOR_L_CONFIG_SELLING_POSSESSED_FAVOURITES_FIRST_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_POSSESSED_FAVOURITES_FIRST_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_UNHIDE_ALL_HIDDEN_ITEMS" name="$parentUnhideAll">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="23" y="-10" relativeTo="$parentPossessedFavouritesFirst"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().UnhideAll = self end</OnLoad><OnClick>
+            self:GetParent():GetParent():GetParent():GetParent():UnhideAllClicked()
+          </OnClick>
+        </Scripts>
+      </Button>
+            </Frames>
+          <Scripts><OnLoad>if self:GetParent() then self:GetParent().Content = self end; self.scrollable = true</OnLoad></Scripts></Frame>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBox = self end</OnLoad></Scripts></Frame>
+
+    </Frames>
+  </Frame>
+</Ui>

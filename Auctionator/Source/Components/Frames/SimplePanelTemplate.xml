@@ -1,0 +1,18 @@
+<Ui>
+  <Frame name="AuctionatorSimplePanelTemplate" virtual="true">
+    <Size x="338" y="424"/>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentBg" file="Interface\DialogFrame\UI-DialogBox-Background" horizTile="true" vertTile="true">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="0" y="-6"/>
+            <Anchor point="BOTTOMRIGHT" x="-2" y="3"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+    <Frame inherits="AuctionatorPanelBorderTemplate" name="$parentBorder"><Scripts><OnLoad>if self:GetParent() then self:GetParent().Border = self end</OnLoad></Scripts></Frame>
+    </Frames>
+  <Scripts><OnLoad>if self:GetName() then self.Bg = _G[self:GetName() .. 'Bg'] end</OnLoad></Scripts></Frame>
+</Ui>

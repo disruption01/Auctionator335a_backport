@@ -1,0 +1,90 @@
+<Ui>
+  <Frame name="AuctionatorBuyFrameTemplate" virtual="true">
+    <Size x="450" y="350"/>
+    <Frames>
+      <Frame inherits="AuctionatorBuyCurrentPricesFrameTemplate" name="$parentCurrentPrices"><Anchors><Anchor point="TOPLEFT"/><Anchor point="BOTTOMRIGHT"/></Anchors><Scripts>
+        <OnLoad>Mixin(self, AuctionatorBuyCurrentPricesFrameMixin); if self:GetParent() then self:GetParent().CurrentPrices = self end</OnLoad>
+        <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+        <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+        <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      </Scripts></Frame>
+      <Frame inherits="AuctionatorBuyHistoryPricesFrameTemplate" hidden="true" name="$parentHistoryPrices"><Anchors><Anchor point="TOPLEFT"/><Anchor point="BOTTOMRIGHT"/></Anchors><Scripts><OnLoad>Mixin(self, AuctionatorBuyHistoryPricesFrameMixin); if self:GetParent() then self:GetParent().HistoryPrices = self end</OnLoad></Scripts></Frame>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_HISTORY" name="$parentHistoryButton">
+        <Anchors>
+          <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentSearchResultsListing"/>
+          <Anchor point="LEFT" x="-8" y="10"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().HistoryButton = self end</OnLoad><OnClick>
+            self:GetParent():ToggleHistory()
+          </OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  <Scripts><OnLoad>Mixin(self, AuctionatorBuyFrameMixin)</OnLoad></Scripts></Frame>
+
+  <Frame name="AuctionatorBuyFrameTemplateForShopping" hidden="true" inherits="AuctionatorBuyFrameTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorBuyFrameMixinForShopping); if self.Init then self:Init() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT" y="-50" relativeTo="$parentResultsListing"/>
+      <Anchor point="BOTTOMRIGHT"/>
+    </Anchors>
+    <Frames>
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="BACK" name="$parentReturnButton">
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" y="10" relativeTo="$parentSearchResultsListing"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().ReturnButton = self end</OnLoad><OnClick>
+            self:GetParent():Hide()
+          </OnClick>
+        </Scripts>
+      </Button>
+
+      <Frame enableMouse="true">
+        <Size x="400" y="50"/>
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorBuyingItemTooltipMixin); if self:GetParent() then self:GetParent().ItemTooltip = self end; if self:GetName() then self.Icon = _G[self:GetName() .. 'Icon'] end; if self:GetName() then self.Text = _G[self:GetName() .. 'Text'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+          <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+          <OnMouseUp>if self.OnMouseUp then self:OnMouseUp(button) end</OnMouseUp>
+        </Scripts>
+        <Anchors>
+            <Anchor point="TOP" y="50"/>
+            <Anchor point="LEFT" relativePoint="RIGHT" relativeTo="$parentReturnButton"/>
+        </Anchors>
+        <Layers>
+          <Layer>
+            <Texture name="$parentIcon">
+              <Size x="40" y="40"/>
+              <Anchors>
+                  <Anchor point="TOP" y="-10"/>
+                  <Anchor point="LEFT" x="15"/>
+              </Anchors>
+            </Texture>
+            <FontString text="Item text" inherits="GameFontHighlight" justifyH="LEFT" name="$parentText">
+              <Size x="400" y="50"/>
+              <Anchors>
+                <Anchor point="TOP" y="-5"/>
+                <Anchor point="LEFT" x="65"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+    </Frames>
+  </Frame>
+
+  <Frame name="AuctionatorBuyFrameTemplateForSelling" inherits="AuctionatorBuyFrameTemplate" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorBuyFrameMixinForSelling)</OnLoad><OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+  </Frame>
+</Ui>

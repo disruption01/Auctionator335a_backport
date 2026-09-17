@@ -1,0 +1,26 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigurationHeadingFrame" virtual="true">
+    <!--
+      <KeyValues>
+        <KeyValue key="headingText" value="" type="string" />
+      </KeyValues>
+    -->
+    <Size y="30"/>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigurationHeadingMixin); if self:GetName() then self.HeadingText = _G[self:GetName() .. 'HeadingText'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+    </Scripts>
+    <Anchors>
+      <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent"/>
+      <Anchor point="RIGHT" relativePoint="RIGHT" relativeTo="$parent"/>
+    </Anchors>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString inherits="GameFontNormalMed2" justifyH="LEFT" name="$parentHeadingText">
+          <Anchors>
+            <Anchor point="TOPLEFT" x="20" y="-10"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

@@ -1,0 +1,222 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorShoppingItemTemplate" inherits="ButtonFrameTemplate" frameStrata="Dialog" enableMouse="true" enableKeyboard="false" virtual="true" hidden="true">
+    <Size x="350" y="350"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorShoppingItemMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorConfigurationSubHeadingFrame" name="$parentSearchStringHeading">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" y="-5" relativeTo="$parentInset"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationSubHeadingMixin); if self:GetParent() then self:GetParent().SearchStringHeading = self end; if self.InitializeSubHeading then self:InitializeSubHeading() end; self.subHeadingText = AUCTIONATOR_L_SEARCH_TERM</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentSearchContainer">
+        <Size y="48"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSearchStringHeading"/>
+          <Anchor point="RIGHT"/>
+        </Anchors>
+        <Frames>
+          <EditBox autoFocus="false" inherits="InputBoxTemplate" letters="100" name="$parentSearchString">
+            <Size x="180" y="20"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="24" y="-4" relativeTo="$parent"/>
+            </Anchors>
+            <FontString inherits="ChatFontNormal" justifyH="LEFT"/>
+            <Scripts>
+              <OnLoad>if self:GetParent() then self:GetParent().SearchString = self end</OnLoad><OnEnterPressed>self:GetParent():GetParent():OnFinishedClicked()</OnEnterPressed>
+              <OnEscapePressed>self:ClearFocus()</OnEscapePressed>
+              <OnTabPressed>self:GetParent():GetParent().LevelRange:SetFocus()</OnTabPressed>
+            </Scripts>
+          </EditBox>
+
+          <Button inherits="AuctionatorResetButton" name="$parentResetSearchStringButton">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="3" y="-3" relativeTo="$parentSearchString"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetSearchStringButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+
+          <CheckButton inherits="UICheckButtonTemplate" name="$parentIsExact">
+            <Size x="20" y="20"/>
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="-8" relativeTo="$parentSearchString"/>
+            </Anchors>
+            <Layers>
+              <Layer level="BACKGROUND">
+                <FontString inherits="GameFontHighlight" text="AUCTIONATOR_L_EXACT_SEARCH">
+                  <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="25" y="-4" relativeTo="$parent"/>
+                  </Anchors>
+                </FontString>
+              </Layer>
+            </Layers>
+          <Scripts><OnLoad>if self:GetParent() then self:GetParent().IsExact = self end</OnLoad></Scripts></CheckButton>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().SearchContainer = self end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationSubHeadingFrame" name="$parentItemClassHeading">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSearchContainer"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationSubHeadingMixin); if self:GetParent() then self:GetParent().ItemClassHeading = self end; if self.InitializeSubHeading then self:InitializeSubHeading() end; self.subHeadingText = AUCTIONATOR_L_ITEM_CLASS</OnLoad></Scripts></Frame>
+
+      <Frame name="$parent_FilterKeySelector" inherits="AuctionatorFilterKeySelectorTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentItemClassHeading"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorFilterKeySelectorMixin); if self:GetParent() then self:GetParent().FilterKeySelector = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationMinMaxFrame" name="$parentLevelRange">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parent_FilterKeySelector"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigMinMaxMixin); if self:GetParent() then self:GetParent().LevelRange = self end; self.titleText = AUCTIONATOR_L_LEVEL; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationMinMaxFrame" name="$parentItemLevelRange">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentLevelRange"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigMinMaxMixin); if self:GetParent() then self:GetParent().ItemLevelRange = self end; self.titleText = AUCTIONATOR_L_ITEM_LEVEL; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationMinMaxFrame" name="$parentPriceRange">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" y="-8" relativeTo="$parentLevelRange"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigMinMaxMixin); if self:GetParent() then self:GetParent().PriceRange = self end; self.titleText = AUCTIONATOR_L_PRICE; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationMinMaxFrame" name="$parentCraftedLevelRange">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentPriceRange"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigMinMaxMixin); if self:GetParent() then self:GetParent().CraftedLevelRange = self end; self.titleText = AUCTIONATOR_L_CRAFTED_LEVEL; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame inherits="AuctionatorConfigurationNumericInputAlternate" name="$parentPurchaseQuantity">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" y="-22" x="30" relativeTo="$parentPriceRange"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorConfigNumericInputMixin); if self:GetParent() then self:GetParent().PurchaseQuantity = self end; self.labelText = AUCTIONATOR_L_QUANTITY; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentQualityContainer">
+        <Size x="50" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="-4" relativeTo="$parentPurchaseQuantity"/>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontHighlight" text="RARITY" name="$parentLabel">
+              <Anchors>
+                <Anchor point="TOPLEFT"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Frame inherits="AuctionatorDropDown" name="$parentDropDown">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" y="8" relativeTo="$parentLabel"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorDropDownMixin); if self:GetParent() then self:GetParent().DropDown = self end; self.labelText = ''; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+          <Button inherits="AuctionatorResetButton" name="$parentResetQualityButton">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="5" y="-5" relativeTo="$parentDropDownDropDown"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetQualityButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().QualityContainer = self end; if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentExpansionContainer">
+        <Size x="50" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="-6" y="-20" relativeTo="$parentQualityContainer"/>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontHighlight" text="AUCTIONATOR_L_EXPANSION" name="$parentLabel">
+              <Anchors>
+                <Anchor point="TOPLEFT"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Frame inherits="AuctionatorDropDown" name="$parentDropDown">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" y="8" relativeTo="$parentLabel"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorDropDownMixin); if self:GetParent() then self:GetParent().DropDown = self end; self.labelText = ''; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+          <Button inherits="AuctionatorResetButton" name="$parentResetExpansionButton">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="5" y="-5" relativeTo="$parentDropDownDropDown"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetExpansionButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().ExpansionContainer = self end; if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentTierContainer">
+        <Size x="50" y="20"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" x="25" y="-20" relativeTo="$parentExpansionContainer"/>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <FontString inherits="GameFontHighlight" text="AUCTIONATOR_L_TIER" name="$parentLabel">
+              <Anchors>
+                <Anchor point="TOPLEFT"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+        <Frames>
+          <Frame inherits="AuctionatorDropDown" name="$parentDropDown">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" y="8" relativeTo="$parentLabel"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorDropDownMixin); if self:GetParent() then self:GetParent().DropDown = self end; self.labelText = ''; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+
+          <Button inherits="AuctionatorResetButton" name="$parentResetTierButton">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="5" y="-5" relativeTo="$parentDropDownDropDown"/>
+            </Anchors>
+          <Scripts><OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetTierButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+        </Frames>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().TierContainer = self end; if self:GetName() then self.Label = _G[self:GetName() .. 'Label'] end</OnLoad></Scripts></Frame>
+
+      <!-- Action Buttons -->
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="" name="$parentFinished">
+        <Anchors>
+          <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentInset"/>
+        </Anchors>
+
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().Finished = self end</OnLoad><OnClick>self:GetParent():OnFinishedClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_CANCEL" name="$parentCancel">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentInset"/>
+        </Anchors>
+
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().Cancel = self end</OnLoad><OnClick>self:GetParent():OnCancelClicked()</OnClick>
+        </Scripts>
+      </Button>
+
+      <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_RESET_ALL" name="$parentResetAllButton">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parentCancel"/>
+        </Anchors>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().ResetAllButton = self end</OnLoad><OnClick>self:GetParent():ResetAll()</OnClick>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+</Ui>

@@ -1,0 +1,42 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorResultsRowTemplate" virtual="true" enableMouse="true">
+    <Size y="20"/>
+
+    <Anchors>
+      <Anchor point="LEFT"/>
+      <Anchor point="RIGHT"/>
+    </Anchors>
+
+    <Layers>
+      <Layer level="OVERLAY">
+        <Texture alphaMode="ADD" hidden="true" file="Interface\Tooltips\UI-Tooltip-Background" name="$parentSelectedHighlight">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+
+        <!-- Using a normal texture for highlight to control the behavior. -->
+        <Texture alphaMode="ADD" hidden="true" file="Interface\Tooltips\UI-Tooltip-Background" name="$parentHighlightTexture">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+
+        <Texture file="Interface\Tooltips\UI-Tooltip-Background" name="$parentNormalTexture">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorResultsRowTemplateMixin); if self:GetName() then self.SelectedHighlight = _G[self:GetName() .. 'SelectedHighlight'] end; if self:GetName() then self.HighlightTexture = _G[self:GetName() .. 'HighlightTexture'] end; if self:GetName() then self.NormalTexture = _G[self:GetName() .. 'NormalTexture'] end</OnLoad><OnMouseUp>if self.OnClick then self:OnClick(button) end</OnMouseUp>
+      <OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+      <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+    </Scripts>
+  </Frame>
+</Ui>

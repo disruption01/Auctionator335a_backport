@@ -1,0 +1,22 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorSellingBagFrame" virtual="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorBagUseMixin); if self:GetParent() then self:GetParent().BagListing = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorGroupsViewTemplate" name="$parentView">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+      <Scripts>
+        <OnLoad>Mixin(self, AuctionatorGroupsViewMixin); if self:GetParent() then self:GetParent().View = self end; self.itemTemplate = 'AuctionatorGroupsViewItemTemplate'; self.groupTemplate = 'AuctionatorSellingViewGroupTemplate'; self.groupInsetX = 0; self.clickEventName = 'BagUse.BagItemClicked'; self.completeEventName = 'ViewComplete'; self.hideHiddenItems = true; self.applyVisibility = true; if self.OnLoad then self:OnLoad() end; if self.EnsurePools then self:EnsurePools() end</OnLoad>
+        <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+        <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      </Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>

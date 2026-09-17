@@ -1,0 +1,104 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorCancellingTabFrameNoRefreshTemplate" virtual="true" hidden="true">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorCancellingFrameMixin); if self:GetParent() then self:GetParent().AuctionatorCancellingFrame = self end; if self:GetName() then self.Total = _G[self:GetName() .. 'Total'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+    </Scripts>
+
+    <Anchors>
+      <Anchor point="TOP"/>
+      <Anchor point="LEFT" x="4"/>
+      <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-4" y="27"/>
+    </Anchors>
+
+    <Frames>
+      <EditBox autoFocus="false" historyLines="1" bytes="64" inherits="SearchBoxTemplate" name="$parentSearchFilter">
+        <Size x="250" y="22"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="65" y="-46" relativeTo="$parent"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().SearchFilter = self end</OnLoad></Scripts></EditBox>
+
+      <Frame name="$parentDataProvider">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorCancellingDataProviderMixin); if self:GetParent() then self:GetParent().DataProvider = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+          <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+          <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+          <OnUpdate>if self.OnUpdate then self:OnUpdate(elapsed) end</OnUpdate>
+        </Scripts>
+      </Frame>
+
+      <Frame inherits="AuctionatorResultsListingTemplate" name="$parentResultsListing">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="4" y="-79" relativeTo="$parent"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-20" relativeTo="$parent"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().ResultsListing = self end</OnLoad></Scripts></Frame>
+
+      <!-- 3.3.5a protected-action bridge: this is one real FrameXML button.
+           It has no visual regions and is moved over the hovered result row, so
+           clicking a row still looks/feels native while CancelAuction originates
+           from an XML-created button instead of a pooled runtime row. -->
+      <Button name="$parentRowCancelButton" hidden="true" enableMouse="true">
+        <Size x="1" y="1"/>
+        <Scripts>
+          <OnLoad>if self:GetParent() then self:GetParent().RowCancelButton = self end; self:RegisterForClicks("LeftButtonUp", "RightButtonUp")</OnLoad>
+          <OnClick>if self:GetParent() and self:GetParent().OnRowCancelButtonClick then self:GetParent():OnRowCancelButtonClick(button) end</OnClick>
+          <OnEnter>if self:GetParent() and self:GetParent().OnRowCancelButtonEnter then self:GetParent():OnRowCancelButtonEnter() end</OnEnter>
+          <OnLeave>if self:GetParent() and self:GetParent().OnRowCancelButtonLeave then self:GetParent():OnRowCancelButtonLeave() end</OnLeave>
+        </Scripts>
+      </Button>
+
+      <Frame inherits="AuctionatorInsetTemplate" name="$parentHistoricalPriceInset">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-5" y="-25" relativeTo="$parentResultsListing"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" y="2" relativeTo="$parentResultsListing"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().HistoricalPriceInset = self end</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentUndercutScanContainer">
+        <Scripts>
+          <OnLoad>Mixin(self, AuctionatorUndercutScanMixin); if self:GetParent() then self:GetParent().UndercutScanContainer = self end; if self.OnLoad then self:OnLoad() end</OnLoad>
+          <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+          <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+          <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+        </Scripts>
+
+        <Anchors>
+          <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$parentResultsListing"/>
+          <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-8"/>
+        </Anchors>
+
+        <Frames>
+          <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_CANCEL_UNDERCUT" name="AuctionatorCancelUndercutButton">
+            <Anchors>
+              <Anchor point="TOPRIGHT" x="3"/>
+            </Anchors>
+            <Scripts>
+              <OnLoad>if self:GetParent() then self:GetParent().CancelNextButton = self end</OnLoad><OnClick>self:GetParent():CancelNextAuction()</OnClick>
+            </Scripts>
+          </Button>
+
+          <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_UNDERCUT_SCAN" name="$parentStartScanButton">
+            <Anchors>
+              <Anchor point="TOPRIGHT" relativePoint="TOPLEFT" x="3" relativeTo="$parentCancelNextButton"/>
+            </Anchors>
+            <Scripts>
+              <OnLoad>if self:GetParent() then self:GetParent().StartScanButton = self end</OnLoad><OnClick>self:GetParent():StartScan()</OnClick>
+            </Scripts>
+          </Button>
+        </Frames>
+      </Frame>
+    </Frames>
+    <Layers>
+      <Layer>
+        <FontString inherits="GameFontHighlight" text="" name="$parentTotal">
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="15" y="-5" relativeTo="$parentSearchFilter"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+  </Frame>
+</Ui>

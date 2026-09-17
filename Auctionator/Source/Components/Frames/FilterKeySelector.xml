@@ -1,0 +1,17 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorFilterKeySelectorTemplate" virtual="true">
+    <Size x="300" y="56"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorFilterKeySelectorMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+    </Scripts>
+
+    <Frames>
+      <Button inherits="AuctionatorResetButton" name="$parentResetButton">
+        <Anchors>
+          <Anchor point="TOPRIGHT" y="-6"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorResetButtonMixin); if self:GetParent() then self:GetParent().ResetButton = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Button>
+    </Frames>
+  </Frame>
+</Ui>

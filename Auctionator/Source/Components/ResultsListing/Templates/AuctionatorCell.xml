@@ -1,0 +1,11 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Button name="AuctionatorCell" enableMouse="true" virtual="true">
+    <Size y="16"/>
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorCellMixin); if self:GetParent() then self:GetParent().cell = self end</OnLoad><OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+      <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+      <OnMouseUp>if self.OnClick then self:OnClick(button) end</OnMouseUp>
+    </Scripts>
+  </Button>
+</Ui>

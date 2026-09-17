@@ -1,0 +1,44 @@
+Auctionator 336 -> WoW 3.3.5a build 12340
+Maintained WoW 3.3.5a compatibility backport by Disruption01.
+Repository: https://github.com/disruption01/Auctionator335a_backport
+Support: https://linktr.ee/disruption01
+
+Original addon by Borj(amacare) and plusmouse.
+Base: Auctionator 336 / TBC Classic.
+Goal: preserve the Auctionator 336 UI/flow while adapting it to the stock
+Wrath 3.3.5a legacy Auction House API.
+
+Initial compatibility work includes:
+- Interface 30300 and explicit Wrath/legacy-AH load path
+- 3.3.5a wrappers for C_Item, C_Container, C_Timer, C_AddOns, C_ChatInfo,
+  Item/ItemLocation, frame pools, mixins, settings and menu helpers
+- basic ScrollBox/DataProvider compatibility layer
+- transformed modern XML mixin/parentKey/method syntax for the old XML parser
+- legacy GetAuctionItemInfo field mapping with ItemID derived from item links
+- legacy posting/query/cancel/full-scan path retained
+- modern atlas fallbacks, including money icons
+- Blizzard_AuctionUI loaded as a dependency so old AuctionFrame templates exist
+
+This is the first runtime-test build. If the client reports a Lua error, capture
+the FIRST error after a clean login/reload; later errors are often cascading.
+
+0.2 runtime fixes:
+- implemented SecondsFormatterMixin Init/Format compatibility used by FormatTime.lua
+- forced legacy/compat input templates to autoFocus=false
+- added a one-time PLAYER_LOGIN focus guard for Auctionator-owned edit boxes
+  to prevent 3.3.5a from swallowing movement/Enter immediately after login
+
+0.3:
+- added AuctionCategories fallback for 3.3.5a legacy AH
+- guarded GetAutoCompleteRealms/connected-realm migration
+- strengthened login EditBox focus cleanup to prevent WASD/Enter capture
+
+0.4:
+- fixed legacy tab wrapper Title creation on anonymous-frame-incompatible 3.3.5 XML
+- fixed Auctionator dropdown child reference for the old XML engine
+- removed the visible "Testing 1 2 3." status placeholder
+- strengthened hidden EditBox focus cleanup to prevent WASD/Enter capture
+
+0.5: fixed EventFrame scrollbars, removed auto-focus/WASD grab, replaced missing green backgrounds, translator placeholders, and added DropdownButton compatibility.
+
+0.7: repaired inherited ScrollBox mixins on 3.3.5a, added Selling price-label fallbacks, removed green item-icon placeholders, and hardened keyboard capture handling.

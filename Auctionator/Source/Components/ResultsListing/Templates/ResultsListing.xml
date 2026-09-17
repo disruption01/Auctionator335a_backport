@@ -1,0 +1,68 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorResultsListingTemplate" virtual="true">
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorResultsListingMixin); if self:GetParent() then self:GetParent().ResultsListing = self end</OnLoad><OnShow>if self.OnShow then self:OnShow() end</OnShow>
+    </Scripts>
+
+    <Frames>
+      <Frame name="$parentHeaderContainer">
+        <Size y="19"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" y="-7" x="-20"/>
+          <Anchor point="RIGHT"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().HeaderContainer = self end</OnLoad></Scripts></Frame>
+
+      <Frame name="$parentScrollArea">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" y="-3" x="15" relativeTo="$parentHeaderContainer"/>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-3" relativeTo="$parentHeaderContainer"/>
+          <Anchor point="BOTTOM" relativePoint="BOTTOMRIGHT" y="4" relativeTo="$parent"/>
+        </Anchors>
+        <Frames>
+          <Frame inherits="WowScrollBoxList" name="$parentScrollBox">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPLEFT"/>
+              <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT"/>
+            </Anchors>
+          <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBox = self end</OnLoad></Scripts></Frame>
+          <Slider inherits="WowTrimScrollBar" name="$parentScrollBar">
+              <Anchors>
+                  <Anchor point="TOPLEFT" relativePoint="TOPRIGHT"/>
+                  <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT"/>
+              </Anchors>
+          <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollBar = self end</OnLoad></Scripts></Slider>
+        </Frames>
+        <Layers>
+          <Layer level="OVERLAY">
+            <FontString inherits="GameFontNormal" hidden="true" text="AUCTIONATOR_L_NO_RESULTS" name="$parentNoResultsText">
+              <Anchors>
+                <Anchor point="CENTER"/>
+              </Anchors>
+              <Shadow x="1" y="-1">
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+            <FontString inherits="GameFontNormal" hidden="true" text="AUCTIONATOR_L_FETCHING_ITEM_INFO" name="$parentResultsText">
+              <Anchors>
+                <Anchor point="TOP" relativePoint="CENTER" y="8" relativeTo="$parentLoadingSpinner"/>
+                <Anchor point="LEFT" x="45"/>
+                <Anchor point="RIGHT" x="-67"/>
+              </Anchors>
+              <Shadow x="1" y="-1">
+                <Color r="0" g="0" b="0"/>
+              </Shadow>
+            </FontString>
+            <Texture hidden="true" file="Interface\Tooltips\UI-Tooltip-Background" name="$parentLoadingSpinner">
+              <Size x="146" y="146"/>
+              <Anchors>
+                <Anchor point="CENTER" x="-12" y="0"/>
+              </Anchors>
+            </Texture>
+          </Layer>
+        </Layers>
+        <Scripts><OnLoad>if self:GetParent() then self:GetParent().ScrollArea = self end; if self:GetName() then self.NoResultsText = _G[self:GetName() .. 'NoResultsText'] end; if self:GetName() then self.ResultsText = _G[self:GetName() .. 'ResultsText'] end; if self:GetName() then self.LoadingSpinner = _G[self:GetName() .. 'LoadingSpinner'] end; self.SpinnerAnim = self.SpinnerAnim or {Play=function() end, Stop=function() end}</OnLoad></Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>

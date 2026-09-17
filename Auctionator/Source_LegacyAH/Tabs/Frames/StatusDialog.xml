@@ -1,0 +1,37 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+ <Frame name="AuctionatorStatusDialogTemplate" virtual="true" frameStrata="Dialog" hidden="true">
+  <Anchors>
+    <Anchor point="CENTER"/>
+    <Anchor point="TOP" y="-20"/>
+  </Anchors>
+  <Scripts>
+    <OnLoad>self.layoutType = 'Dialog'; if self:GetName() then self.StatusText = _G[self:GetName() .. 'StatusText'] end; if self:GetName() then self.Background = _G[self:GetName() .. 'Background'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+    <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+  </Scripts>
+  <Size x="338" y="50"/>
+  <Layers>
+    <Layer>
+      <FontString inherits="GameFontHighlight" text="" name="$parentStatusText">
+        <Anchors>
+          <Anchor point="CENTER"/>
+        </Anchors>
+      </FontString>
+    </Layer>
+    <Layer level="BACKGROUND">
+      <Texture name="$parentBackground">
+        <Anchors>
+          <Anchor point="TOPLEFT" x="6" y="-8"/>
+          <Anchor point="BOTTOMRIGHT" x="-6" y="8"/>
+        </Anchors>
+        <Color r="0" g="0" b="0" a="0.8"/>
+      </Texture>
+    </Layer>
+  </Layers>
+  <Frames>
+    <Frame inherits="NineSlicePanelTemplate" name="$parentNineSlice"><Scripts><OnLoad>if self:GetParent() then self:GetParent().NineSlice = self end</OnLoad></Scripts></Frame>
+  </Frames>
+</Frame>
+
+<Frame name="AuctionatorPageStatusDialogTemplate" inherits="AuctionatorStatusDialogTemplate" virtual="true" hidden="true"><Scripts><OnLoad>self.layoutType = 'Dialog'; if self:GetName() then self.StatusText = _G[self:GetName() .. 'StatusText'] end; if self:GetName() then self.Background = _G[self:GetName() .. 'Background'] end; Mixin(self, AuctionatorPageStatusDialogMixin); if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+<Frame name="AuctionatorThrottlingTimeoutDialogTemplate" inherits="AuctionatorStatusDialogTemplate" virtual="true" frameLevel="500" hidden="true"><Scripts><OnLoad>self.layoutType = 'Dialog'; if self:GetName() then self.StatusText = _G[self:GetName() .. 'StatusText'] end; if self:GetName() then self.Background = _G[self:GetName() .. 'Background'] end; Mixin(self, AuctionatorThrottlingTimeoutDialogMixin); if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+</Ui>

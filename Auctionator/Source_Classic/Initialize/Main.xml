@@ -1,0 +1,8 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorInitalizeClassicFrame">
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorInitializeClassicMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnEvent>if self.OnEvent then self:OnEvent(event, ...) end</OnEvent>
+    </Scripts>
+  </Frame>
+</Ui>

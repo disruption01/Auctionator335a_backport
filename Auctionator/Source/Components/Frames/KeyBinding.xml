@@ -1,0 +1,56 @@
+<Ui>
+  <Button name="AuctionatorKeyBindingButtonTemplate" inherits="UIMenuButtonStretchTemplate" virtual="true">
+    <Size x="160" y="20"/>
+    <Layers>
+      <Layer level="OVERLAY">
+        <Texture file="Interface\Buttons\UI-Silver-Button-Select" alphaMode="ADD" hidden="true" name="$parentselectedHighlight">
+          <Size x="160" y="20"/>
+          <Anchors>
+            <Anchor point="CENTER" x="0" y="-3"/>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+    <NormalFont style="GameFontHighlightSmall"/>
+    <DisabledFont style="GameFontDisableSmall"/>
+    <HighlightFont style="GameFontHighlightSmall"/>
+    <Scripts>
+      <OnLoad>if self:GetName() then self.selectedHighlight = _G[self:GetName() .. 'selectedHighlight'] end</OnLoad><OnMouseDown>
+        self:GetParent():OnClick(button)
+      </OnMouseDown>
+      <OnEnter>
+        self:GetParent():OnEnter()
+      </OnEnter>
+      <OnLeave>
+        self:GetParent():OnLeave()
+      </OnLeave>
+    </Scripts>
+  </Button>
+  <Frame name="AuctionatorKeyBindingConfigTemplate" virtual="true">
+    <Size x="500" y="35"/>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <FontString inherits="GameFontHighlight" justifyH="LEFT" name="$parentDescription">
+          <Size x="280" y="20"/>
+          <Anchors>
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" y="-5" x="25" relativeTo="$parent"/>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Button inherits="AuctionatorKeyBindingButtonTemplate" name="$parentButton">
+        <Anchors>
+          <Anchor point="RIGHT" relativePoint="RIGHT" x="-20" relativeTo="$parent"/>
+        </Anchors>
+      <Scripts><OnLoad>if self:GetParent() then self:GetParent().Button = self end</OnLoad></Scripts></Button>
+    </Frames>
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorKeyBindingConfigMixin); if self:GetName() then self.Description = _G[self:GetName() .. 'Description'] end; if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnHide>if self.OnHide then self:OnHide() end</OnHide>
+      <OnMouseDown>if self.OnClick then self:OnClick(button) end</OnMouseDown>
+      <OnEnter>if self.OnEnter then self:OnEnter() end</OnEnter>
+      <OnLeave>if self.OnLeave then self:OnLeave() end</OnLeave>
+    </Scripts>
+  </Frame>
+</Ui>

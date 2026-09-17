@@ -1,0 +1,35 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+  <Frame name="AuctionatorConfigSellingShortcutsFrameTemplate" virtual="true">
+
+    <Scripts>
+      <OnLoad>Mixin(self, AuctionatorConfigSellingShortcutsFrameMixin); if self.OnLoad then self:OnLoad() end</OnLoad>
+      <OnShow>if self.OnShow then self:OnShow() end</OnShow>
+      <OnHide>if self.Save then self:Save() end</OnHide>
+    </Scripts>
+
+    <Frames>
+      <Frame inherits="AuctionatorConfigurationTitleFrame" name="$parentTitleArea">
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationTitleFrameMixin); if self:GetParent() then self:GetParent().TitleArea = self end; self.titleText = AUCTIONATOR_L_CONFIG_SELLING_SHORTCUTS_CATEGORY; self.subTitleText = AUCTIONATOR_L_CONFIG_SELLING_SHORTCUTS_TEXT; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorDropDown" name="$parentBagSelectShortcut">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentTitleArea"/>
+        </Anchors>
+      <Scripts><OnLoad>Mixin(self, AuctionatorDropDownMixin); if self:GetParent() then self:GetParent().BagSelectShortcut = self end; self.labelText = AUCTIONATOR_L_CONFIG_SELLING_BAG_SELECT_SHORTCUT; self.textString = 'RIGHT_CLICK;ALT_LEFT_CLICK;ALT_RIGHT_CLICK;SHIFT_LEFT_CLICK;SHIFT_RIGHT_CLICK;DISABLED'; self.valuesString = 'right click;alt left click;alt right click;shift left click;shift right click;none'; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorKeyBindingConfigTemplate" name="$parentPostShortcut">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentBagSelectShortcut"/>
+        </Anchors>
+        <Scripts><OnLoad>self.labelText = AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT_TOOLTIP_TEXT; self.tooltipTitleText = AUCTIONATOR_L_CUSTOM_KEYBOARD_SHORTCUTS; Mixin(self, AuctionatorKeyBindingConfigMixin); if self:GetParent() then self:GetParent().PostShortcut = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorKeyBindingConfigTemplate" name="$parentSkipShortcut">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentPostShortcut"/>
+        </Anchors>
+        <Scripts><OnLoad>self.labelText = AUCTIONATOR_L_CONFIG_SELLING_SKIP_SHORTCUT; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT_TOOLTIP_TEXT; self.tooltipTitleText = AUCTIONATOR_L_CUSTOM_KEYBOARD_SHORTCUTS; Mixin(self, AuctionatorKeyBindingConfigMixin); if self:GetParent() then self:GetParent().SkipShortcut = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+      <Frame inherits="AuctionatorKeyBindingConfigTemplate" name="$parentPrevShortcut">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentSkipShortcut"/>
+        </Anchors>
+        <Scripts><OnLoad>self.labelText = AUCTIONATOR_L_CONFIG_SELLING_PREV_SHORTCUT; self.tooltipText = AUCTIONATOR_L_CONFIG_SELLING_POST_SHORTCUT_TOOLTIP_TEXT; self.tooltipTitleText = AUCTIONATOR_L_CUSTOM_KEYBOARD_SHORTCUTS; Mixin(self, AuctionatorKeyBindingConfigMixin); if self:GetParent() then self:GetParent().PrevShortcut = self end; if self.OnLoad then self:OnLoad() end</OnLoad></Scripts></Frame>
+    </Frames>
+  </Frame>
+</Ui>
