@@ -20,6 +20,9 @@ https://github.com/disruption01
 Repository:  
 https://github.com/disruption01/Auctionator335a_backport
 
+Discord:  
+https://discord.gg/eJ5MaVNnBm
+
 Support:  
 https://linktr.ee/disruption01
 

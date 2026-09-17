@@ -96,7 +96,7 @@ Please report reproducible backport-specific issues through this repository inst
 Release naming convention:
 
 ```text
-Auctionator-3.3.5a-v1.0.0
+Auctionator-3.3.5a-v1.0
 ```
 
 ## Updating
@@ -119,6 +119,9 @@ https://github.com/disruption01
 Backport repository:  
 https://github.com/disruption01/Auctionator335a_backport
 
+Discord:  
+https://discord.gg/eJ5MaVNnBm
+
 ## License
 
 The upstream source included in this backport retains its original copyright and license notices.
@@ -132,6 +135,12 @@ The backport does not replace, remove, or reassign upstream authorship or copyri
 Please report issues through GitHub Issues:
 
 https://github.com/disruption01/Auctionator335a_backport/issues
+
+Discord is available for discussion and general help:
+
+https://discord.gg/eJ5MaVNnBm
+
+GitHub Issues are preferred for tracked bugs.
 
 When relevant, include:
 
@@ -149,6 +158,10 @@ Contributions that improve WoW 3.3.5a compatibility are welcome once repository 
 Please keep changes focused, preserve upstream attribution, and avoid replacing working legacy compatibility code with unsupported modern APIs.
 
 ## Support
+
+Official Discord:
+
+https://discord.gg/eJ5MaVNnBm
 
 If you enjoy my addons and would like to support continued development, maintenance, ports, and backports:
 

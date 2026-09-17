@@ -46,11 +46,15 @@
       </Frame>
       <Frame inherits="AuctionatorConfigurationCopyAndPasteFrame" name="$parentDiscordLink">
         <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="-154" relativeTo="$parent"/></Anchors>
-        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationCopyAndPasteMixin); if self:GetParent() then self:GetParent().DiscordLink = self end; self.labelText = 'GitHub'; self.copyText = 'https://github.com/disruption01/Auctionator335a_backport'; self.tooltipTitleText = 'GitHub'; self.tooltipText = 'Auctionator 3.3.5a backport repository maintained by Disruption01.'; if self.OnLoad then self:OnLoad() end; if self.Refresh then self:Refresh() end</OnLoad><OnShow>if self.Refresh then self:Refresh() end</OnShow></Scripts>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationCopyAndPasteMixin); if self:GetParent() then self:GetParent().DiscordLink = self end; self.labelText = 'Discord'; self.copyText = 'https://discord.gg/eJ5MaVNnBm'; self.tooltipTitleText = 'Disruption01 Discord'; self.tooltipText = 'Official Discord for discussion and general help with Disruption01 addons.'; if self.OnLoad then self:OnLoad() end; if self.Refresh then self:Refresh() end</OnLoad><OnShow>if self.Refresh then self:Refresh() end</OnShow></Scripts>
+      </Frame>
+      <Frame inherits="AuctionatorConfigurationCopyAndPasteFrame" name="$parentGitHubLink">
+        <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="-188" relativeTo="$parent"/></Anchors>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationCopyAndPasteMixin); if self:GetParent() then self:GetParent().GitHubLink = self end; self.labelText = 'GitHub'; self.copyText = 'https://github.com/disruption01/Auctionator335a_backport'; self.tooltipTitleText = 'GitHub'; self.tooltipText = 'Auctionator 3.3.5a backport repository maintained by Disruption01.'; if self.OnLoad then self:OnLoad() end; if self.Refresh then self:Refresh() end</OnLoad><OnShow>if self.Refresh then self:Refresh() end</OnShow></Scripts>
       </Frame>
       <Frame inherits="AuctionatorConfigurationCopyAndPasteFrame" name="$parentBugReportLink">
-        <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="-188" relativeTo="$parent"/></Anchors>
-        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationCopyAndPasteMixin); if self:GetParent() then self:GetParent().BugReportLink = self end; self.labelText = AUCTIONATOR_L_BUG_REPORT; self.copyText = 'https://github.com/disruption01/Auctionator335a_backport/issues'; self.tooltipTitleText = AUCTIONATOR_L_BUG_TOOLTIP_HEADER; self.tooltipText = AUCTIONATOR_L_BUG_TOOLTIP_TEXT; if self.OnLoad then self:OnLoad() end; if self.Refresh then self:Refresh() end</OnLoad><OnShow>if self.Refresh then self:Refresh() end</OnShow></Scripts>
+        <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="-222" relativeTo="$parent"/></Anchors>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationCopyAndPasteMixin); if self:GetParent() then self:GetParent().BugReportLink = self end; self.labelText = AUCTIONATOR_L_BUG_REPORT; self.copyText = 'https://github.com/disruption01/Auctionator335a_backport/issues'; self.tooltipTitleText = AUCTIONATOR_L_BUG_TOOLTIP_HEADER; self.tooltipText = 'Please use GitHub Issues for tracked Auctionator 3.3.5a backport bugs.'; if self.OnLoad then self:OnLoad() end; if self.Refresh then self:Refresh() end</OnLoad><OnShow>if self.Refresh then self:Refresh() end</OnShow></Scripts>
       </Frame>
 
       <Button inherits="UIPanelDynamicResizeButtonTemplate" text="AUCTIONATOR_L_FULL_SCAN_BUTTON" name="$parentScanButton">

@@ -3,7 +3,12 @@
 ## Version: 1.0
 ## Author: Borj(amacare), plusmouse
 ## X-Maintainer: Disruption01
+## X-Backport-Author: Disruption01
+## X-Original-Project: https://github.com/TheMouseNest/Auctionator
 ## X-Website: https://github.com/disruption01/Auctionator335a_backport
+## X-GitHub: https://github.com/disruption01/Auctionator335a_backport
+## X-Discord: https://discord.gg/eJ5MaVNnBm
+## X-Support: https://linktr.ee/disruption01
 ## X-Category: Auction/Economy
 ## Notes: Original addon by Borj(amacare) and plusmouse. WoW 3.3.5a backport and compatibility work by Disruption01.
 ## SavedVariables: AUCTIONATOR_CONFIG, AUCTIONATOR_SAVEDVARS, AUCTIONATOR_SHOPPING_LISTS, AUCTIONATOR_PRICE_DATABASE, AUCTIONATOR_POSTING_HISTORY, AUCTIONATOR_VENDOR_PRICE_CACHE, AUCTIONATOR_RECENT_SEARCHES, AUCTIONATOR_SELLING_GROUPS

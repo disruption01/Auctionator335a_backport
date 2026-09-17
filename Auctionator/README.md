@@ -48,18 +48,23 @@ The profit percentage and deposit coverage are configurable in **Selling: All It
 ## Installation
 
 1. Download or clone this repository.
-2. Copy the `Auctionator` folder into your WoW 3.3.5a addon directory:
+2. Copy the included `Auctionator` folder into your WoW `Interface\AddOns` directory.
+3. Start or restart World of Warcraft.
+4. Make sure **Auctionator** is enabled in the AddOns list.
+
+The final layout should be:
 
 ```text
-E:\WoW335\Interface\AddOns\Auctionator
+Interface\AddOns\Auctionator\Auctionator.toc
 ```
-
-3. Start or reload World of Warcraft.
-4. Make sure **Auctionator** is enabled in the AddOns list.
 
 ## Repository
 
 https://github.com/disruption01/Auctionator335a_backport
+
+Official Discord:
+
+https://discord.gg/eJ5MaVNnBm
 
 Please report issues with this **3.3.5a backport** in this repository rather than through the upstream Auctionator support channels.
 
@@ -77,7 +82,23 @@ Backport, compatibility work, maintenance, testing fixes, and 3.3.5a-specific ad
 
 https://github.com/disruption01
 
+Discord:
+
+https://discord.gg/eJ5MaVNnBm
+
+## Bug Reports
+
+Please report tracked bugs through GitHub Issues:
+
+https://github.com/disruption01/Auctionator335a_backport/issues
+
+Discord is intended for discussion and general help.
+
 ## Support
+
+Official Discord:
+
+https://discord.gg/eJ5MaVNnBm
 
 If you enjoy my addons and would like to support continued development, maintenance, ports, and backports:
 

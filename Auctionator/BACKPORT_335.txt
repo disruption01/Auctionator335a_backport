@@ -1,6 +1,7 @@
 Auctionator 336 -> WoW 3.3.5a build 12340
 Maintained WoW 3.3.5a compatibility backport by Disruption01.
 Repository: https://github.com/disruption01/Auctionator335a_backport
+Discord: https://discord.gg/eJ5MaVNnBm
 Support: https://linktr.ee/disruption01
 
 Original addon by Borj(amacare) and plusmouse.
