@@ -181,20 +181,22 @@ function MinimapButton.Create()
   button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
   button:RegisterForDrag("LeftButton")
 
-  -- Native legacy minimap-button artwork. This keeps the button round on
-  -- stock 3.3.5a and derived 3.3.5a clients without using modern texture masks.
+  -- Native 3.3.5a minimap-button artwork. The tracking-border texture is
+  -- intentionally anchored TOPLEFT (not CENTER): its visible circular ring is
+  -- offset inside the 52x52 legacy texture. Centering that texture makes the
+  -- ring appear detached from the icon on stock/Whitemane clients.
   local background = button:CreateTexture(nil, "BACKGROUND")
   background:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
   background:SetWidth(20)
   background:SetHeight(20)
-  background:SetPoint("CENTER", button, "CENTER", 0, 0)
+  background:SetPoint("TOPLEFT", button, "TOPLEFT", 7, -5)
   button.Background = background
 
   local icon = button:CreateTexture(nil, "ARTWORK")
   icon:SetTexture("Interface\\AddOns\\Auctionator\\Images\\Logo")
   icon:SetWidth(18)
   icon:SetHeight(18)
-  icon:SetPoint("CENTER", button, "CENTER", 0, 0)
+  icon:SetPoint("CENTER", button, "CENTER", 0, -1)
   icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
   button.Icon = icon
 
@@ -202,7 +204,7 @@ function MinimapButton.Create()
   border:SetTexture("Interface\\Minimap\\MiniMap-TrackingBorder")
   border:SetWidth(52)
   border:SetHeight(52)
-  border:SetPoint("CENTER", button, "CENTER", 0, 0)
+  border:SetPoint("TOPLEFT", button, "TOPLEFT", 0, 0)
   button.Border = border
 
   local highlight = button:CreateTexture(nil, "HIGHLIGHT")
@@ -210,7 +212,7 @@ function MinimapButton.Create()
   highlight:SetBlendMode("ADD")
   highlight:SetWidth(24)
   highlight:SetHeight(24)
-  highlight:SetPoint("CENTER", button, "CENTER", 0, 0)
+  highlight:SetPoint("CENTER", button, "CENTER", 0, -1)
 
   PositionButton(button, GetSavedState().angle)
 
