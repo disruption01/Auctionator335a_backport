@@ -177,39 +177,12 @@ SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF = 'igMainMenuOptionCheckBoxOff'
 SOUNDKIT.IG_MAINMENU_CLOSE = 'igMainMenuClose'
 SOUNDKIT.IG_MAINMENU_OPTION = 'igMainMenuOption'
 
--- Settings API --------------------------------------------------------------
-Settings = Settings or {}
-local settingsID = 0
-local function makeCategory(frame, name)
-  settingsID = settingsID + 1
-  local c = {ID=settingsID, frame=frame, name=name}
-  function c:GetID() return self.ID end
-  return c
-end
-if not Settings.RegisterCanvasLayoutCategory then
-  function Settings.RegisterCanvasLayoutCategory(frame,name)
-    frame.name = name
-    return makeCategory(frame,name)
-  end
-end
-if not Settings.RegisterCanvasLayoutSubcategory then
-  function Settings.RegisterCanvasLayoutSubcategory(parent,frame,name)
-    frame.name=name; frame.parent=parent and parent.name
-    return makeCategory(frame,name)
-  end
-end
-if not Settings.RegisterAddOnCategory then
-  function Settings.RegisterAddOnCategory(category)
-    if category and category.frame and InterfaceOptions_AddCategory then InterfaceOptions_AddCategory(category.frame) end
-  end
-end
-if not Settings.OpenToCategory then
-  function Settings.OpenToCategory(id)
-    if InterfaceOptionsFrame_OpenToCategory and Auctionator and Auctionator.State and Auctionator.State.OptionsCategory then
-      InterfaceOptionsFrame_OpenToCategory(Auctionator.State.OptionsCategory.frame or Auctionator.State.OptionsCategory.name)
-    end
-  end
-end
+-- Interface Options ---------------------------------------------------------
+-- IMPORTANT: do not create or extend the modern Blizzard `_G.Settings` API on
+-- 3.3.5a. Other addons use the existence of that global for feature detection
+-- and may enter modern code paths that the legacy client cannot support.
+-- Auctionator registers its panels directly through the native 3.3.5a
+-- InterfaceOptions_* API instead (see Source/Config/Mixins/PanelConfig.lua).
 
 -- NineSlice is cosmetic on 3.3.5a ------------------------------------------
 NineSliceUtil = NineSliceUtil or {}

@@ -7,7 +7,7 @@ Auctionator 336 adapted for the legacy World of Warcraft 3.3.5a Auction House cl
 
 ## Release
 
-**Version 1.0** is the first stable public release of the Disruption01 WoW 3.3.5a backport.
+**Version 1.0.1** is the current Disruption01 release for WoW 3.3.5a.
 
 This project keeps the original Auctionator workflow and appearance as closely as practical while adapting modern Classic FrameXML, APIs, widgets, and Auction House behavior to the 3.3.5a client.
 

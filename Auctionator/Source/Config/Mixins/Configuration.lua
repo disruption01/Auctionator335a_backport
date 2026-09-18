@@ -22,7 +22,7 @@ function AuctionatorConfigFrameMixin:OnLoad()
   Auctionator.Debug.Message("AuctionatorConfigFrameMixin:OnLoad()")
 
   self.name = "Auctionator"
-  self:SetParent(SettingsPanel)
+  self:SetParent(InterfaceOptionsFramePanelContainer or UIParent)
 
   Auctionator335SetupRootOptionsLanding(self)
   self:SetupPanel()

@@ -7,7 +7,7 @@ WoW 3.3.5a backport and compatibility work maintained by **Disruption01**.
 
 ## Status
 
-**Stable** — Disruption01 release **v1.0**.
+**Stable** — Disruption01 release **v1.0.1**.
 
 This backport is intended to preserve the Auctionator 336 workflow and appearance as closely as practical while adapting its modern Classic FrameXML, APIs, widgets, and Auction House behavior to the legacy 3.3.5a client.
 
@@ -90,13 +90,13 @@ Please report reproducible backport-specific issues through this repository inst
 
 ## Version
 
-**Disruption01 release:** 1.0  
+**Disruption01 release:** 1.0.1  
 **Upstream base:** Auctionator 336
 
 Release naming convention:
 
 ```text
-Auctionator-3.3.5a-v1.0
+Auctionator-3.3.5a-v1.0.1
 ```
 
 ## Updating

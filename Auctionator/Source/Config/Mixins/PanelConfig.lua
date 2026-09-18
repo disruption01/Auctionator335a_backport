@@ -167,13 +167,16 @@ function AuctionatorPanelConfigMixin:SetupPanel()
 
   Auctionator335StyleOptionsPanel(self)
 
+  -- 3.3.5a has the legacy InterfaceOptions API, not the modern Settings API.
+  -- Register the real panel frames directly and never expose a fake `_G.Settings`
+  -- table: unrelated addons commonly use `if Settings then ...` as modern-client
+  -- feature detection.
+  if InterfaceOptions_AddCategory then
+    InterfaceOptions_AddCategory(self)
+  end
+
   if self.parent == nil then
-    local category = Settings.RegisterCanvasLayoutCategory(self, self.name)
-    Settings.RegisterAddOnCategory(category)
-    Auctionator.State.OptionsCategory = category
-  else
-    local subcategory = Settings.RegisterCanvasLayoutSubcategory(Auctionator.State.OptionsCategory, self, self.name)
-    Settings.RegisterAddOnCategory(subcategory)
+    Auctionator.State.OptionsCategory = self
   end
 end
 
