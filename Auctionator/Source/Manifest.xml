@@ -18,6 +18,7 @@
   <Include file="Database\Manifest.xml"/>
 
   <Include file="SlashCmd\Manifest.xml"/>
+  <Script file="MinimapButton.lua"/>
 
   <Include file="Shopping\Manifest.xml"/>
   <Include file="Config\Manifest.xml"/>

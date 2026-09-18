@@ -8,7 +8,7 @@ local function Auctionator335FixInfoLayout(self)
   if self.VersionHeading and self.VersionHeading.HeadingText then self.VersionHeading.HeadingText:SetText(AUCTIONATOR_L_VERSION_HEADER) end
   if self.Author and self.Author.SetText then self.Author:SetText("Borj(amacare), plusmouse") end
   if self.Contributors and self.Contributors.SetText then self.Contributors:SetText("Disruption01") end
-  if self.Version and self.Version.SetText then self.Version:SetText("|cff00ff00v1.0.1|r") end
+  if self.Version and self.Version.SetText then self.Version:SetText("|cff00ff00v1.0.2|r") end
 
   if self.ScanButton then
     self.ScanButton:SetWidth(96)

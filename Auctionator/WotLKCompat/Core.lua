@@ -121,9 +121,27 @@ EXPANSION_NAME2 = EXPANSION_NAME2 or 'Wrath of the Lich King'
 AUCTION_CANCEL_COST = AUCTION_CANCEL_COST or 5
 
 -- Enum ---------------------------------------------------------------------
+-- Some 3.3.5a-derived clients expose partial modern Enum tables.  Do not
+-- replace those tables wholesale, but also do not assume that a table being
+-- present means every modern key Auctionator needs exists.  Fill only missing
+-- values so stock 3.3.5a keeps the exact same compatibility values while
+-- clients such as Whitemane can safely coexist with their native extensions.
 Enum = Enum or {}
-Enum.ItemQuality = Enum.ItemQuality or {Poor=0,Standard=1,Common=1,Good=2,Uncommon=2,Rare=3,Epic=4,Legendary=5,Artifact=6,Heirloom=7,WoWToken=8}
-Enum.ItemClass = Enum.ItemClass or {Consumable=0,Container=1,Weapon=2,Gem=3,Armor=4,Reagent=5,Projectile=6,Tradegoods=7,ItemEnhancement=8,Recipe=9,CurrencyTokenObsolete=10,Quiver=11,Questitem=12,Key=13,PermanentObsolete=14,Miscellaneous=15,Glyph=16,Battlepet=17,WoWToken=18,Profession=19,Housing=20,Amor=4}
+Enum.ItemQuality = Enum.ItemQuality or {}
+local compatItemQualities = {Poor=0,Standard=1,Common=1,Good=2,Uncommon=2,Rare=3,Epic=4,Legendary=5,Artifact=6,Heirloom=7,WoWToken=8}
+for key, value in pairs(compatItemQualities) do
+  if Enum.ItemQuality[key] == nil then
+    Enum.ItemQuality[key] = value
+  end
+end
+
+Enum.ItemClass = Enum.ItemClass or {}
+local compatItemClasses = {Consumable=0,Container=1,Weapon=2,Gem=3,Armor=4,Reagent=5,Projectile=6,Tradegoods=7,ItemEnhancement=8,Recipe=9,CurrencyTokenObsolete=10,Quiver=11,Questitem=12,Key=13,PermanentObsolete=14,Miscellaneous=15,Glyph=16,Battlepet=17,WoWToken=18,Profession=19,Housing=20,Amor=4}
+for key, value in pairs(compatItemClasses) do
+  if Enum.ItemClass[key] == nil then
+    Enum.ItemClass[key] = value
+  end
+end
 Enum.InventoryType = Enum.InventoryType or {
   IndexNonEquipType=0,IndexHeadType=1,IndexNeckType=2,IndexShoulderType=3,IndexBodyType=4,
   IndexChestType=5,IndexWaistType=6,IndexLegsType=7,IndexFeetType=8,IndexWristType=9,
@@ -138,23 +156,60 @@ Enum.PlayerInteractionType = Enum.PlayerInteractionType or {Auctioneer=21,MailIn
 Enum.TooltipDataType = Enum.TooltipDataType or {Unit=2,Item=10,Spell=11}
 
 -- Colors -------------------------------------------------------------------
+-- Some 3.3.5a-derived clients (notably Whitemane) expose a partial modern
+-- ColorMixin/CreateColor implementation.  Do not use one method (SetRGBA) as
+-- proof that the whole modern color API exists: Whitemane can provide SetRGBA
+-- while omitting WrapTextInColorCode.  Fill each missing method independently
+-- so stock 3.3.5a keeps the same compatibility behaviour and partial clients
+-- only receive the pieces they actually lack.
 ColorMixin = ColorMixin or {}
 if not ColorMixin.SetRGBA then
   function ColorMixin:SetRGBA(r,g,b,a) self.r,self.g,self.b,self.a=r,g,b,a or 1 end
+end
+if not ColorMixin.GetRGB then
   function ColorMixin:GetRGB() return self.r,self.g,self.b end
+end
+if not ColorMixin.GetRGBA then
   function ColorMixin:GetRGBA() return self.r,self.g,self.b,self.a or 1 end
-  function ColorMixin:GenerateHexColor() return string.format('ff%02x%02x%02x', Clamp(Round((self.r or 0)*255),0,255), Clamp(Round((self.g or 0)*255),0,255), Clamp(Round((self.b or 0)*255),0,255)) end
+end
+if not ColorMixin.GenerateHexColor then
+  function ColorMixin:GenerateHexColor()
+    return string.format('ff%02x%02x%02x', Clamp(Round((self.r or 0)*255),0,255), Clamp(Round((self.g or 0)*255),0,255), Clamp(Round((self.b or 0)*255),0,255))
+  end
+end
+if not ColorMixin.GenerateHexColorMarkup then
   function ColorMixin:GenerateHexColorMarkup() return '|c'..self:GenerateHexColor() end
+end
+if not ColorMixin.WrapTextInColorCode then
   function ColorMixin:WrapTextInColorCode(text) return self:GenerateHexColorMarkup()..tostring(text)..'|r' end
 end
-if not CreateColor then
-  function CreateColor(r,g,b,a) local c=CreateFromMixins(ColorMixin); c:SetRGBA(r,g,b,a); return c end
+
+local function auctionatorCompatColor(r,g,b,a)
+  local c={r=r or 1,g=g or 1,b=b or 1,a=a or 1}
+  for k,v in pairs(ColorMixin) do
+    if type(v)=='function' and c[k]==nil then c[k]=v end
+  end
+  return c
 end
+
+if not CreateColor then
+  function CreateColor(r,g,b,a) return auctionatorCompatColor(r,g,b,a) end
+end
+
+local function ensureColorMethods(c, r, g, b)
+  if type(c)~='table' then
+    return auctionatorCompatColor(r,g,b,1)
+  end
+  for k,v in pairs(ColorMixin) do
+    if type(v)=='function' and c[k]==nil then c[k]=v end
+  end
+  if c.r==nil then c.r,c.g,c.b=r or 1,g or 1,b or 1 end
+  if c.a==nil then c.a=1 end
+  return c
+end
+
 local function ensureColor(name,r,g,b)
-  local c=_G[name]
-  if type(c)~='table' then c={r=r,g=g,b=b}; _G[name]=c end
-  for k,v in pairs(ColorMixin) do if c[k]==nil then c[k]=v end end
-  if c.r==nil then c.r,c.g,c.b=r,g,b end
+  _G[name]=ensureColorMethods(_G[name],r,g,b)
 end
 ensureColor('WHITE_FONT_COLOR',1,1,1); ensureColor('NORMAL_FONT_COLOR',1,.82,0)
 ensureColor('HIGHLIGHT_FONT_COLOR',1,1,1); ensureColor('RED_FONT_COLOR',1,.1,.1)
@@ -164,7 +219,9 @@ ensureColor('LIGHTBLUE_FONT_COLOR',.6,.8,1); ensureColor('ORANGE_FONT_COLOR',1,.
 ensureColor('DISABLED_FONT_COLOR',.5,.5,.5)
 if type(ITEM_QUALITY_COLORS)=='table' then
   for _,q in pairs(ITEM_QUALITY_COLORS) do
-    if type(q)=='table' and q.r and not q.color then q.color=CreateColor(q.r,q.g,q.b,1) end
+    if type(q)=='table' and q.r then
+      q.color=ensureColorMethods(q.color,q.r,q.g,q.b)
+    end
   end
 end
 

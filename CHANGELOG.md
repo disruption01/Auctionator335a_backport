@@ -2,6 +2,15 @@
 
 All notable Disruption01 changes to the WoW 3.3.5a backport are documented here.
 
+## 1.0.2
+
+- Compatibility fixes for Whitemane-derived 3.3.5a clients while preserving stock 3.3.5a behavior.
+- Accept subclass names returned as strings by legacy/private-server auction APIs.
+- Complete missing methods on partial color API implementations instead of assuming the full modern `ColorMixin` exists.
+- Fix Shopping item-name/color rendering when the client item cache is incomplete.
+- Add a native legacy minimap button with settings, in-game credits, GitHub, Discord, support, bug-report and upstream links.
+- Use native circular 3.3.5a minimap artwork for the button.
+
 ## 1.0.1
 
 - Removed the fake global Blizzard `Settings` API shim from the 3.3.5a compatibility layer.

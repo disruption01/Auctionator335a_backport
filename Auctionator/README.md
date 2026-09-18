@@ -7,7 +7,7 @@ Auctionator 336 adapted for the legacy World of Warcraft 3.3.5a Auction House cl
 
 ## Release
 
-**Version 1.0.1** is the current Disruption01 release for WoW 3.3.5a.
+**Version 1.0.2** is the current Disruption01 release for WoW 3.3.5a.
 
 This project keeps the original Auctionator workflow and appearance as closely as practical while adapting modern Classic FrameXML, APIs, widgets, and Auction House behavior to the 3.3.5a client.
 
@@ -111,3 +111,13 @@ Support is completely optional and does not unlock addon functionality.
 The upstream source included in this repository retains its original copyright and license notices. See [`LICENSE`](LICENSE).
 
 Backport-specific changes do not replace or remove the original authorship, copyright notices, or licensing terms.
+
+## Minimap Button
+
+The 3.3.5a backport includes a native legacy minimap button.
+
+- **Left-click:** open Auctionator settings.
+- **Right-click:** view credits and access the Disruption01 GitHub, Discord, support, bug-report, CurseForge, and upstream-project links.
+- **Drag:** reposition the button around the minimap.
+
+The implementation uses only native 3.3.5a UI APIs and does not expose modern Blizzard feature-detection globals.

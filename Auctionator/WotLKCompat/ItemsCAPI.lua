@@ -301,7 +301,25 @@ if not GetDetailedItemLevelInfo then function GetDetailedItemLevelInfo(item) ret
 function C_Item.GetCurrentItemLevel(loc) local link=Auctionator_GetLinkFromLocation(loc); return link and select(4,GetItemInfo(link)) end
 local classNames={[0]='Consumable',[1]='Container',[2]='Weapon',[3]='Gem',[4]='Armor',[5]='Reagent',[6]='Projectile',[7]='Trade Goods',[9]='Recipe',[11]='Quiver',[12]='Quest',[13]='Key',[15]='Miscellaneous',[16]='Glyph'}
 function C_Item.GetItemClassInfo(id) return classNames[id] or ('Class '..tostring(id)) end
-function C_Item.GetItemSubClassInfo(classID,subID) if GetItemSubClassInfo then return GetItemSubClassInfo(classID,subID) end return '' end
+function C_Item.GetItemSubClassInfo(classID, subID)
+  -- The legacy auction API returns localized subclass NAMES, while some
+  -- 3.3.5a-derived clients (notably Whitemane) also expose a modern-ish
+  -- GetItemSubClassInfo() that accepts numeric IDs only.  OldCategories feeds
+  -- values from GetAuctionItemSubClasses() through here, so a string is already
+  -- the display name we need and must not be passed to the native function.
+  if type(subID) == "string" then
+    return subID
+  end
+
+  if type(GetItemSubClassInfo) == "function" and type(subID) == "number" then
+    local ok, name = pcall(GetItemSubClassInfo, classID, subID)
+    if ok then
+      return name
+    end
+  end
+
+  return ''
+end
 function C_Item.GetStackCount(loc) local bag,slot=Auctionator_GetBagAndSlotFromLocation(loc); if bag~=nil and slot~=nil then local i=C_Container.GetContainerItemInfo(bag,slot);return i and i.stackCount or 1 end return 1 end
 local inventoryTypeTokens={
   [0]='INVTYPE_NON_EQUIP',[1]='INVTYPE_HEAD',[2]='INVTYPE_NECK',[3]='INVTYPE_SHOULDER',[4]='INVTYPE_BODY',

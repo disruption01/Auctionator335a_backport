@@ -1,6 +1,6 @@
 ## Interface: 30300
-## Title: Auctionator |cff00ff00v1.0.1|r
-## Version: 1.0.1
+## Title: Auctionator |cff00ff00v1.0.2|r
+## Version: 1.0.2
 ## Author: Borj(amacare), plusmouse
 ## X-Maintainer: Disruption01
 ## X-Backport-Author: Disruption01

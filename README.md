@@ -7,7 +7,7 @@ WoW 3.3.5a backport and compatibility work maintained by **Disruption01**.
 
 ## Status
 
-**Stable** — Disruption01 release **v1.0.1**.
+**Stable** — Disruption01 release **v1.0.2**.
 
 This backport is intended to preserve the Auctionator 336 workflow and appearance as closely as practical while adapting its modern Classic FrameXML, APIs, widgets, and Auction House behavior to the legacy 3.3.5a client.
 
@@ -26,6 +26,7 @@ This backport is intended to preserve the Auctionator 336 workflow and appearanc
 - Import / Export of Shopping Lists
 - Export of search results
 - 3.3.5a-compatible configuration and Info panels
+- Native 3.3.5a minimap button with settings, credits and project/support links
 
 ## Disruption01 Additions
 
@@ -53,6 +54,8 @@ Client build: **12340**
 This project targets the legacy 3.3.5a Auction House client. It is not intended for Retail or current official Classic clients.
 
 Private-server behavior can differ between cores. If you report a server-specific issue, include the server/core when known.
+
+Compatibility fallbacks are included for Whitemane-derived 3.3.5a client behavior while preserving the stock 3.3.5a code paths.
 
 ## Requirements
 
@@ -90,13 +93,13 @@ Please report reproducible backport-specific issues through this repository inst
 
 ## Version
 
-**Disruption01 release:** 1.0.1  
+**Disruption01 release:** 1.0.2  
 **Upstream base:** Auctionator 336
 
 Release naming convention:
 
 ```text
-Auctionator-3.3.5a-v1.0.1
+Auctionator-3.3.5a-v1.0.2
 ```
 
 ## Updating

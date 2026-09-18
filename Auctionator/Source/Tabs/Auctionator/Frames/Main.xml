@@ -28,7 +28,7 @@
       </Frame>
       <Frame inherits="AuctionatorConfigurationSubHeadingFrame" name="$parentVersion">
         <Anchors><Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="520" y="-28" relativeTo="$parent"/></Anchors>
-        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationSubHeadingMixin); if self:GetParent() then self:GetParent().Version = self end; self.subHeadingText = '|cff00ff00v1.0.1|r'; if self.InitializeSubHeading then self:InitializeSubHeading() end</OnLoad></Scripts>
+        <Scripts><OnLoad>Mixin(self, AuctionatorConfigurationSubHeadingMixin); if self:GetParent() then self:GetParent().Version = self end; self.subHeadingText = '|cff00ff00v1.0.2|r'; if self.InitializeSubHeading then self:InitializeSubHeading() end</OnLoad></Scripts>
       </Frame>
 
       <Frame inherits="AuctionatorConfigurationHeadingFrame" name="$parentContributeHeading">

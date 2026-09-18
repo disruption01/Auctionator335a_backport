@@ -158,8 +158,23 @@ function AuctionatorDirectSearchProviderMixin:AddFinalResults()
 
   for key, entries in pairs(self.resultsByKey) do
     local minPrice = GetMinPrice(entries)
+    local firstEntry = entries[1]
+    local representativeLink = firstEntry and firstEntry.itemLink or nil
+    local representativeName = representativeLink and representativeLink:match("%[(.-)%]") or nil
+    local representativeQuality = firstEntry and firstEntry.info and firstEntry.info[4] or nil
+    local representativeDisplayName = representativeName
+    if representativeName and representativeQuality ~= nil and GetItemQualityColor then
+      local _, _, _, hex = GetItemQualityColor(representativeQuality)
+      if hex and hex ~= "" then
+        representativeDisplayName = "|c" .. hex .. representativeName .. "|r"
+      end
+    end
+
     local possibleResult = {
       itemString = key,
+      itemLink = representativeLink,
+      name = representativeName,
+      itemName = representativeDisplayName,
       minPrice = GetMinPrice(entries),
       totalQuantity = GetQuantity(entries),
       containsOwnerItem = GetOwned(entries),
